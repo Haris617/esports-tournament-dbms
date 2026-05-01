@@ -1,0 +1,265 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="2000" viewBox="0 0 1900 2000" role="img" aria-labelledby="title desc">
+  <title id="title">Gaming Tournament Database ERD</title>
+  <desc id="desc">Non-overlapping table-style ERD with Games at the top, Matches on the left, Prizes on the right, Registeration in the middle, then Teams, TeamPlayers, and Players below.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #f6f7fb; }
+      .panel { fill: #ffffff; stroke: #d6dbe8; stroke-width: 2; }
+      .header { fill: #26324a; }
+      .headerText { fill: #ffffff; font: 700 20px Segoe UI, Arial, sans-serif; }
+      .field { font: 16px Segoe UI, Arial, sans-serif; fill: #26324a; }
+      .rowLine { stroke: #eef1f6; stroke-width: 1.5; }
+      .pk { fill: #fff5d6; stroke: #e0b84d; }
+      .fk { fill: #e8f3ff; stroke: #78aee8; }
+      .chipText { font: 700 11px Segoe UI, Arial, sans-serif; fill: #26324a; }
+      .rel { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .relA { stroke: #2f80ed; }
+      .relB { stroke: #27ae60; }
+      .relC { stroke: #f2994a; }
+      .relD { stroke: #9b51e0; }
+      .relE { stroke: #eb5757; }
+      .relF { stroke: #009688; }
+      .relG { stroke: #7c3aed; }
+      .relH { stroke: #475467; }
+      .labelBox { fill: #ffffff; stroke: #d6dbe8; stroke-width: 1.5; }
+      .label { font: 700 14px Segoe UI, Arial, sans-serif; fill: #344054; }
+      .cardinality { font: 800 17px Segoe UI, Arial, sans-serif; fill: #111827; }
+      .titleText { font: 800 34px Segoe UI, Arial, sans-serif; fill: #1f2937; }
+      .subtitleText { font: 16px Segoe UI, Arial, sans-serif; fill: #667085; }
+    </style>
+
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#101828" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1900" height="2000"/>
+  <text class="titleText" x="80" y="58">Gaming Tournament Database ERD</text>
+  <text class="subtitleText" x="82" y="88">Clean layout: Game top, Matches left, Prizes right, Registeration middle, Teams and Players below.</text>
+
+  <!-- Relationships are drawn behind the tables. -->
+  <path class="rel relA" d="M950 300 V420"/>
+  <rect class="labelBox" x="915" y="345" width="70" height="30" rx="7"/>
+  <text class="label" x="950" y="365" text-anchor="middle">HAS</text>
+  <text class="cardinality" x="965" y="324" text-anchor="middle">1</text>
+  <text class="cardinality" x="965" y="409" text-anchor="middle">M</text>
+
+  <path class="rel relD" d="M740 552 H570"/>
+  <rect class="labelBox" x="602" y="528" width="106" height="30" rx="7"/>
+  <text class="label" x="655" y="548" text-anchor="middle">SCHEDULES</text>
+  <text class="cardinality" x="718" y="544" text-anchor="middle">1</text>
+  <text class="cardinality" x="592" y="544" text-anchor="middle">M</text>
+
+  <path class="rel relB" d="M1160 552 H1330"/>
+  <rect class="labelBox" x="1198" y="528" width="94" height="30" rx="7"/>
+  <text class="label" x="1245" y="548" text-anchor="middle">AWARDS</text>
+  <text class="cardinality" x="1182" y="544" text-anchor="middle">1</text>
+  <text class="cardinality" x="1308" y="544" text-anchor="middle">M</text>
+
+  <path class="rel relC" d="M950 685 V815"/>
+  <rect class="labelBox" x="915" y="735" width="70" height="30" rx="7"/>
+  <text class="label" x="950" y="755" text-anchor="middle">HAS</text>
+  <text class="cardinality" x="965" y="710" text-anchor="middle">1</text>
+  <text class="cardinality" x="965" y="805" text-anchor="middle">M</text>
+
+  <path class="rel relF" d="M950 1035 V1110"/>
+  <rect class="labelBox" x="902" y="1058" width="96" height="30" rx="7"/>
+  <text class="label" x="950" y="1078" text-anchor="middle">FOR TEAM</text>
+  <text class="cardinality" x="965" y="1054" text-anchor="middle">M</text>
+  <text class="cardinality" x="965" y="1102" text-anchor="middle">1</text>
+
+  <path class="rel relG" d="M950 1280 V1390"/>
+  <rect class="labelBox" x="915" y="1324" width="70" height="30" rx="7"/>
+  <text class="label" x="950" y="1344" text-anchor="middle">HAS</text>
+  <text class="cardinality" x="965" y="1304" text-anchor="middle">1</text>
+  <text class="cardinality" x="965" y="1380" text-anchor="middle">M</text>
+
+  <path class="rel relH" d="M950 1625 V1710"/>
+  <rect class="labelBox" x="902" y="1650" width="96" height="30" rx="7"/>
+  <text class="label" x="950" y="1670" text-anchor="middle">FOR PLAYER</text>
+  <text class="cardinality" x="965" y="1646" text-anchor="middle">M</text>
+  <text class="cardinality" x="965" y="1702" text-anchor="middle">1</text>
+
+  <path class="rel relE" d="M1140 1192 H1810 V665 H1720"/>
+  <rect class="labelBox" x="1765" y="904" width="70" height="30" rx="7"/>
+  <text class="label" x="1800" y="924" text-anchor="middle">WINS</text>
+  <text class="cardinality" x="1164" y="1185" text-anchor="middle">1</text>
+  <text class="cardinality" x="1742" y="657" text-anchor="middle">M</text>
+
+  <!-- tbl_Games -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="770" y="100" width="360" height="200" rx="8"/>
+    <rect class="header" x="770" y="100" width="360" height="46" rx="8"/>
+    <rect class="header" x="770" y="128" width="360" height="18"/>
+    <text class="headerText" x="796" y="130">tbl_Games</text>
+    <line class="rowLine" x1="796" y1="190" x2="1104" y2="190"/>
+    <line class="rowLine" x1="796" y1="221" x2="1104" y2="221"/>
+    <line class="rowLine" x1="796" y1="252" x2="1104" y2="252"/>
+    <rect class="pk" x="796" y="163" width="38" height="22" rx="6"/>
+    <text class="chipText" x="815" y="179" text-anchor="middle">PK</text>
+    <text class="field" x="850" y="180">game_id</text>
+    <text class="field" x="796" y="211">game_name</text>
+    <text class="field" x="796" y="242">genre</text>
+    <text class="field" x="796" y="273">max_team_size</text>
+  </g>
+
+  <!-- tbl_Tournaments -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="740" y="420" width="420" height="265" rx="8"/>
+    <rect class="header" x="740" y="420" width="420" height="46" rx="8"/>
+    <rect class="header" x="740" y="448" width="420" height="18"/>
+    <text class="headerText" x="766" y="450">tbl_Tournaments</text>
+    <line class="rowLine" x1="766" y1="510" x2="1134" y2="510"/>
+    <line class="rowLine" x1="766" y1="541" x2="1134" y2="541"/>
+    <line class="rowLine" x1="766" y1="572" x2="1134" y2="572"/>
+    <line class="rowLine" x1="766" y1="603" x2="1134" y2="603"/>
+    <line class="rowLine" x1="766" y1="634" x2="1134" y2="634"/>
+    <rect class="pk" x="766" y="483" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="499" text-anchor="middle">PK</text>
+    <text class="field" x="820" y="500">tournament_id</text>
+    <rect class="fk" x="766" y="514" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="530" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="531">game_id</text>
+    <text class="field" x="766" y="562">title</text>
+    <text class="field" x="766" y="593">start_date</text>
+    <text class="field" x="766" y="624">end_date</text>
+    <text class="field" x="766" y="655">status</text>
+  </g>
+
+  <!-- tbl_Matches -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="100" y="420" width="470" height="310" rx="8"/>
+    <rect class="header" x="100" y="420" width="470" height="46" rx="8"/>
+    <rect class="header" x="100" y="448" width="470" height="18"/>
+    <text class="headerText" x="126" y="450">tbl_Matches</text>
+    <line class="rowLine" x1="126" y1="510" x2="544" y2="510"/>
+    <line class="rowLine" x1="126" y1="541" x2="544" y2="541"/>
+    <line class="rowLine" x1="126" y1="572" x2="544" y2="572"/>
+    <line class="rowLine" x1="126" y1="603" x2="544" y2="603"/>
+    <line class="rowLine" x1="126" y1="634" x2="544" y2="634"/>
+    <line class="rowLine" x1="126" y1="665" x2="544" y2="665"/>
+    <line class="rowLine" x1="126" y1="696" x2="544" y2="696"/>
+    <rect class="pk" x="126" y="483" width="38" height="22" rx="6"/>
+    <text class="chipText" x="145" y="499" text-anchor="middle">PK</text>
+    <text class="field" x="180" y="500">match_id</text>
+    <rect class="fk" x="126" y="514" width="38" height="22" rx="6"/>
+    <text class="chipText" x="145" y="530" text-anchor="middle">FK</text>
+    <text class="field" x="180" y="531">tournament_id</text>
+    <rect class="fk" x="126" y="545" width="38" height="22" rx="6"/>
+    <text class="chipText" x="145" y="561" text-anchor="middle">FK</text>
+    <text class="field" x="180" y="562">team1_id</text>
+    <rect class="fk" x="126" y="576" width="38" height="22" rx="6"/>
+    <text class="chipText" x="145" y="592" text-anchor="middle">FK</text>
+    <text class="field" x="180" y="593">team2_id</text>
+    <rect class="fk" x="126" y="607" width="38" height="22" rx="6"/>
+    <text class="chipText" x="145" y="623" text-anchor="middle">FK</text>
+    <text class="field" x="180" y="624">winner_team_id</text>
+    <text class="field" x="126" y="655">team1_score</text>
+    <text class="field" x="126" y="686">team2_score</text>
+    <text class="field" x="126" y="717">played_at</text>
+  </g>
+
+  <!-- tbl_Prizes -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="1330" y="420" width="390" height="255" rx="8"/>
+    <rect class="header" x="1330" y="420" width="390" height="46" rx="8"/>
+    <rect class="header" x="1330" y="448" width="390" height="18"/>
+    <text class="headerText" x="1356" y="450">tbl_Prizes</text>
+    <line class="rowLine" x1="1356" y1="510" x2="1694" y2="510"/>
+    <line class="rowLine" x1="1356" y1="541" x2="1694" y2="541"/>
+    <line class="rowLine" x1="1356" y1="572" x2="1694" y2="572"/>
+    <line class="rowLine" x1="1356" y1="603" x2="1694" y2="603"/>
+    <line class="rowLine" x1="1356" y1="634" x2="1694" y2="634"/>
+    <rect class="pk" x="1356" y="483" width="38" height="22" rx="6"/>
+    <text class="chipText" x="1375" y="499" text-anchor="middle">PK</text>
+    <text class="field" x="1410" y="500">prize_id</text>
+    <rect class="fk" x="1356" y="514" width="38" height="22" rx="6"/>
+    <text class="chipText" x="1375" y="530" text-anchor="middle">FK</text>
+    <text class="field" x="1410" y="531">tournament_id</text>
+    <rect class="fk" x="1356" y="545" width="38" height="22" rx="6"/>
+    <text class="chipText" x="1375" y="561" text-anchor="middle">FK</text>
+    <text class="field" x="1410" y="562">team_id</text>
+    <text class="field" x="1356" y="593">position</text>
+    <text class="field" x="1356" y="624">prize_title</text>
+    <text class="field" x="1356" y="655">prize_amount</text>
+  </g>
+
+  <!-- tbl_Registeration -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="740" y="815" width="420" height="220" rx="8"/>
+    <rect class="header" x="740" y="815" width="420" height="46" rx="8"/>
+    <rect class="header" x="740" y="843" width="420" height="18"/>
+    <text class="headerText" x="766" y="845">tbl_Registeration</text>
+    <line class="rowLine" x1="766" y1="905" x2="1134" y2="905"/>
+    <line class="rowLine" x1="766" y1="936" x2="1134" y2="936"/>
+    <line class="rowLine" x1="766" y1="967" x2="1134" y2="967"/>
+    <rect class="pk" x="766" y="878" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="894" text-anchor="middle">PK</text>
+    <text class="field" x="820" y="895">registeration_id</text>
+    <rect class="fk" x="766" y="909" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="925" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="926">tournament_id</text>
+    <rect class="fk" x="766" y="940" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="956" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="957">team_id</text>
+    <text class="field" x="766" y="988">registered_at</text>
+  </g>
+
+  <!-- tbl_Teams -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="760" y="1110" width="380" height="170" rx="8"/>
+    <rect class="header" x="760" y="1110" width="380" height="46" rx="8"/>
+    <rect class="header" x="760" y="1138" width="380" height="18"/>
+    <text class="headerText" x="786" y="1140">tbl_Teams</text>
+    <line class="rowLine" x1="786" y1="1200" x2="1114" y2="1200"/>
+    <line class="rowLine" x1="786" y1="1231" x2="1114" y2="1231"/>
+    <rect class="pk" x="786" y="1173" width="38" height="22" rx="6"/>
+    <text class="chipText" x="805" y="1189" text-anchor="middle">PK</text>
+    <text class="field" x="840" y="1190">team_id</text>
+    <text class="field" x="786" y="1221">team_name</text>
+    <text class="field" x="786" y="1252">created_at</text>
+  </g>
+
+  <!-- tbl_TeamPlayers -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="740" y="1390" width="420" height="235" rx="8"/>
+    <rect class="header" x="740" y="1390" width="420" height="46" rx="8"/>
+    <rect class="header" x="740" y="1418" width="420" height="18"/>
+    <text class="headerText" x="766" y="1420">tbl_TeamPlayers</text>
+    <line class="rowLine" x1="766" y1="1480" x2="1134" y2="1480"/>
+    <line class="rowLine" x1="766" y1="1511" x2="1134" y2="1511"/>
+    <line class="rowLine" x1="766" y1="1542" x2="1134" y2="1542"/>
+    <line class="rowLine" x1="766" y1="1573" x2="1134" y2="1573"/>
+    <rect class="pk" x="766" y="1453" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="1469" text-anchor="middle">PK</text>
+    <text class="field" x="820" y="1470">team_player_id</text>
+    <rect class="fk" x="766" y="1484" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="1500" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="1501">team_id</text>
+    <rect class="fk" x="766" y="1515" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="1531" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="1532">player_id</text>
+    <text class="field" x="766" y="1563">joined_at</text>
+    <text class="field" x="766" y="1594">membership_status</text>
+  </g>
+
+  <!-- tbl_Players -->
+  <g filter="url(#shadow)">
+    <rect class="panel" x="760" y="1710" width="380" height="225" rx="8"/>
+    <rect class="header" x="760" y="1710" width="380" height="46" rx="8"/>
+    <rect class="header" x="760" y="1738" width="380" height="18"/>
+    <text class="headerText" x="786" y="1740">tbl_Players</text>
+    <line class="rowLine" x1="786" y1="1800" x2="1114" y2="1800"/>
+    <line class="rowLine" x1="786" y1="1831" x2="1114" y2="1831"/>
+    <line class="rowLine" x1="786" y1="1862" x2="1114" y2="1862"/>
+    <line class="rowLine" x1="786" y1="1893" x2="1114" y2="1893"/>
+    <rect class="pk" x="786" y="1773" width="38" height="22" rx="6"/>
+    <text class="chipText" x="805" y="1789" text-anchor="middle">PK</text>
+    <text class="field" x="840" y="1790">player_id</text>
+    <text class="field" x="786" y="1821">full_name</text>
+    <text class="field" x="786" y="1852">email</text>
+    <text class="field" x="786" y="1883">username</text>
+    <text class="field" x="786" y="1914">is_active_flag</text>
+  </g>
+</svg>

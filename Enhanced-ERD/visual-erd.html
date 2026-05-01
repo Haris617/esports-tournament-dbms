@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gaming Tournament Database ERD</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f6f7fb;
+      color: #1f2937;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    .frame {
+      width: min(100%, 2020px);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toolbar {
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .hint {
+      margin: 4px 0 0;
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .canvas {
+      overflow: auto;
+      border: 1px solid #d6dbe8;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 14px 40px rgba(16, 24, 40, 0.12);
+    }
+
+    img {
+      display: block;
+      width: 1900px;
+      height: 2000px;
+      max-width: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <div class="toolbar">
+      <h1>Gaming Tournament Database ERD</h1>
+      <p class="hint">Games on top, Matches left, Prizes right, Registeration in the middle, then Teams, TeamPlayers, and Players.</p>
+    </div>
+
+    <div class="canvas" aria-label="Scrollable ERD canvas">
+      <img src="visual-erd.svg" alt="Gaming tournament database entity relationship diagram">
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esports Tournament DBMS GUI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Project navigation">
+      <div class="brand">
+        <div class="brand-mark">DB</div>
+        <div>
+          <p class="eyebrow">Final Code GUI</p>
+          <h1>Esports DBMS</h1>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <a href="#overview" class="nav-link active">Overview</a>
+        <a href="#schema" class="nav-link">Schema</a>
+        <a href="#records" class="nav-link">Records</a>
+        <a href="#queries" class="nav-link">SQL Queries</a>
+        <a href="#requirements" class="nav-link">Coverage</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <p class="eyebrow">Database</p>
+        <strong>SQL Server / SSMS</strong>
+        <span>8 main tables covering games, tournaments, players, teams, matches, registrations, and prizes.</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="overview" class="section">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Tournament organizer system</p>
+            <h2>Esports Tournament Management Database</h2>
+            <p class="lead">A clean visual interface for explaining the final SQL code: games, tournaments, players, teams, registrations, matches, prizes, relationships, numbered questions, functions, and procedures.</p>
+          </div>
+          <div class="top-actions">
+            <a class="button secondary" href="../final-source-code/Final%20Source%20Code.sql" target="_blank">Open Final SQL</a>
+          </div>
+        </div>
+
+        <div class="metric-grid" id="metricGrid"></div>
+
+        <div class="overview-grid">
+          <div class="panel story-panel">
+            <div class="section-heading">
+              <p class="eyebrow">Scenario</p>
+              <h3>What the database manages</h3>
+            </div>
+            <p>The system supports an esports organization that hosts tournaments for games such as Valorant, DOTA 2, Counter Strike, Apex Legends, COD, Delta Force, PUBG, and Football.</p>
+            <p>Players register once, teams are created for tournaments, registrations connect teams with matches, matches record competing teams and scores, and prizes are assigned to tournament positions.</p>
+            <div class="story-flow" aria-label="Database workflow">
+              <span>Game</span>
+              <span>Tournament</span>
+              <span>Teams</span>
+              <span>Registration</span>
+              <span>Matches</span>
+              <span>Prizes</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-heading">
+              <p class="eyebrow">Tournament status</p>
+              <h3>Event pipeline</h3>
+            </div>
+            <div id="statusBars" class="status-bars"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="schema" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Design</p>
+          <h2>Schema and relationships</h2>
+        </div>
+
+        <div class="schema-layout">
+          <div class="panel">
+            <div class="section-heading compact">
+              <p class="eyebrow">Main tables</p>
+              <h3>Entity purpose</h3>
+            </div>
+            <div class="table-card-grid" id="tableCards"></div>
+          </div>
+
+          <div class="panel erd-panel">
+            <div class="section-heading compact">
+              <p class="eyebrow">EERD</p>
+              <h3>Enhanced relationship diagram</h3>
+            </div>
+            <img src="../Enhanced-ERD/visual-erd.svg" alt="Enhanced ERD diagram for esports tournament database" class="erd-image">
+          </div>
+        </div>
+
+        <div class="relationship-grid" id="relationshipGrid"></div>
+      </section>
+
+      <section id="records" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Sample data</p>
+          <h2>Inserted records from SQL</h2>
+        </div>
+
+        <div class="data-toolbar">
+          <div class="tabs" id="dataTabs" aria-label="Record tables"></div>
+          <label class="search-box">
+            <span>Search</span>
+            <input id="recordSearch" type="search" placeholder="player, game, email, status...">
+          </label>
+        </div>
+
+        <div class="panel data-panel">
+          <div class="table-wrap">
+            <table id="recordTable"></table>
+          </div>
+        </div>
+      </section>
+
+      <section id="queries" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">SQL explanation</p>
+          <h2>Query explorer</h2>
+        </div>
+
+        <div class="query-layout">
+          <div class="panel query-list-panel">
+            <div class="tabs vertical" id="queryTabs" aria-label="SQL query categories"></div>
+            <div id="queryList" class="query-list"></div>
+          </div>
+
+          <div class="panel code-panel">
+            <div class="code-header">
+              <div>
+                <p class="eyebrow" id="queryCategory">DDL</p>
+                <h3 id="queryTitle">Create database tables</h3>
+              </div>
+              <span id="queryBadge" class="badge">Schema</span>
+            </div>
+            <p id="queryPoint" class="query-point"></p>
+            <pre><code id="queryCode"></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="requirements" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Requirement mapping</p>
+          <h2>What the final code covers</h2>
+        </div>
+
+        <div class="coverage-grid" id="coverageGrid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
