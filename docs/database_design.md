@@ -14,7 +14,7 @@ Clean browser version:
 | --- | --- |
 | `tbl_Games` | Stores available games, their genres, and maximum team size. |
 | `tbl_Tournaments` | Stores tournaments and links each tournament to one game. |
-| `tbl_Teams` | Stores teams created for tournaments. |
+| `tbl_Teams` | Stores team details independently from tournaments. |
 | `tbl_Players` | Stores player information and active/inactive status. |
 | `tbl_TeamPlayers` | Resolves the many-to-many relationship between players and teams. |
 | `tbl_Matches` | Stores match records, scores, winners, and match time. |
@@ -24,7 +24,6 @@ Clean browser version:
 ## Relationship Summary
 
 - `tbl_Games` to `tbl_Tournaments`: one-to-many.
-- `tbl_Tournaments` to `tbl_Teams`: one-to-many.
 - `tbl_Tournaments` to `tbl_Matches`: one-to-many.
 - `tbl_Tournaments` to `tbl_Registeration`: one-to-many.
 - `tbl_Tournaments` to `tbl_Prizes`: one-to-many.
@@ -38,7 +37,6 @@ Clean browser version:
 ```mermaid
 erDiagram
     GAME_TITLE ||--o{ TOURNAMENT_EVENT : hosts
-    TOURNAMENT_EVENT ||--o{ TEAM_UNIT : has
     COMPETITOR ||--o{ ROSTER_ENTRY : joins
     TEAM_UNIT ||--o{ ROSTER_ENTRY : contains
     TOURNAMENT_EVENT ||--o{ MATCH_FIXTURE : schedules
