@@ -219,73 +219,61 @@ const db = {
     "teams":  [
                   {
                       "team_id":  1,
-                      "tournament_id":  1,
                       "team_name":  "Falcon Fury Squad",
                       "created_at":  "2026-01-05 10:00"
                   },
                   {
                       "team_id":  2,
-                      "tournament_id":  1,
                       "team_name":  "Byte Bandits Squad",
                       "created_at":  "2026-01-05 10:15"
                   },
                   {
                       "team_id":  3,
-                      "tournament_id":  2,
                       "team_name":  "Ancient Titans Squad",
                       "created_at":  "2026-02-01 11:00"
                   },
                   {
                       "team_id":  4,
-                      "tournament_id":  2,
                       "team_name":  "Mystic Mids Squad",
                       "created_at":  "2026-02-01 11:15"
                   },
                   {
                       "team_id":  5,
-                      "tournament_id":  3,
                       "team_name":  "Goal Diggers Squad",
                       "created_at":  "2026-03-01 09:30"
                   },
                   {
                       "team_id":  6,
-                      "tournament_id":  3,
                       "team_name":  "Net Strikers Squad",
                       "created_at":  "2026-03-01 09:45"
                   },
                   {
                       "team_id":  7,
-                      "tournament_id":  4,
                       "team_name":  "Strike Core",
                       "created_at":  "2026-04-05 12:00"
                   },
                   {
                       "team_id":  8,
-                      "tournament_id":  4,
                       "team_name":  "Flash Point",
                       "created_at":  "2026-04-05 12:15"
                   },
                   {
                       "team_id":  9,
-                      "tournament_id":  5,
                       "team_name":  "Storm Riders",
                       "created_at":  "2026-05-15 14:00"
                   },
                   {
                       "team_id":  10,
-                      "tournament_id":  5,
                       "team_name":  "Zone Hunters",
                       "created_at":  "2026-05-15 14:15"
                   },
                   {
                       "team_id":  11,
-                      "tournament_id":  8,
                       "team_name":  "Reserve Squad",
                       "created_at":  "2026-08-15 10:00"
                   },
                   {
                       "team_id":  12,
-                      "tournament_id":  8,
                       "team_name":  "Circle Breakers",
                       "created_at":  "2026-08-15 10:15"
                   }
@@ -667,7 +655,7 @@ const db = {
 const tableDefinitions = [
   { name: "tbl_Games", purpose: "Stores game title, genre, and maximum team size.", keys: ["(PK) game_id"] },
   { name: "tbl_Tournaments", purpose: "Stores tournament schedule, status, and selected game.", keys: ["(PK) tournament_id", "(FK) game_id"] },
-  { name: "tbl_Teams", purpose: "Stores teams assigned to tournaments.", keys: ["(PK) team_id", "(FK) tournament_id"] },
+  { name: "tbl_Teams", purpose: "Stores team details independently.", keys: ["(PK) team_id"] },
   { name: "tbl_Players", purpose: "Stores registered player details with unique email and username.", keys: ["(PK) player_id", "UNIQUE email", "UNIQUE username"] },
   { name: "tbl_TeamPlayers", purpose: "Connects teams and players with membership status.", keys: ["(PK) team_player_id", "(FK) team_id", "(FK) player_id"] },
   { name: "tbl_Matches", purpose: "Stores match teams, winner, scores, and play time.", keys: ["(PK) match_id", "(FK) tournament_id", "(FK) team ids"] },
@@ -677,10 +665,10 @@ const tableDefinitions = [
 
 const relationships = [
   ["tbl_Games -> tbl_Tournaments", "One game can host many tournaments through game_id."],
-  ["tbl_Tournaments -> tbl_Teams", "One tournament can have many teams through tournament_id."],
   ["tbl_Players -> tbl_TeamPlayers <- tbl_Teams", "TeamPlayers connects players to teams with membership_status."],
   ["tbl_Tournaments -> tbl_Matches", "Matches belong to tournaments and store team1, team2, winner, scores, and play time."],
-  ["tbl_Registeration -> tbl_Matches", "Registeration links tournament teams to the matches they played."],
+  ["tbl_Tournaments -> tbl_Registeration <- tbl_Teams", "Registeration connects teams to tournament matches."],
+  ["tbl_Registeration -> tbl_Matches", "Registeration links registered teams to the matches they played."],
   ["tbl_Prizes -> tbl_Teams", "Prize rows store the tournament, winning team, position, title, and integer amount."]
 ];
 
@@ -739,11 +727,10 @@ const dataViews = {
   Teams: {
     rows: db.teams.map((row) => ({
       team_id: idName(row.team_id, row.team_name),
-      tournament_id: idName(row.tournament_id, tournamentTitle(row.tournament_id)),
       team_name: row.team_name,
       created_at: row.created_at
     })),
-    columns: ["team_id", "tournament_id", "team_name", "created_at"]
+    columns: ["team_id", "team_name", "created_at"]
   },
   Players: {
     rows: db.players.map((row) => ({
@@ -1163,10 +1150,10 @@ const queries = {
                            "code":  "-- Q58. Create a procedure to check if a player is active or inactive.\r\nCREATE OR ALTER PROCEDURE sp_CheckPlayerStatus\n    @player_id INT\nAS\nBEGIN\n    IF EXISTS (\n        SELECT 1\n        FROM tbl_Players\n        WHERE player_id = @player_id\n          AND is_active_flag = 1\n    )\n    BEGIN\n        SELECT \u0027Player is Active\u0027 AS player_status;\n    END\n    ELSE\n    BEGIN\n        SELECT \u0027Player is Inactive or Not Found\u0027 AS player_status;\n    END\nEND;\nGO\n\nEXEC sp_CheckPlayerStatus 1;\nGO"
                        },
                        {
-                           "title":  "Q59. Create a procedure to print numbers from 1 to 5.",
+                           "title":  "Q59. Create a procedure to show tournament matches using WHILE loop.",
                            "badge":  "Q59",
-                           "point":  "Create a procedure to print numbers from 1 to 5.",
-                           "code":  "-- Q59. Create a procedure to print numbers from 1 to 5.\r\nCREATE OR ALTER PROCEDURE sp_PrintNumbers\nAS\nBEGIN\n    DECLARE @num INT;\n    SET @num = 1;\n\n    WHILE @num \u003c= 5\n    BEGIN\n        PRINT @num;\n        SET @num = @num + 1;\n    END\nEND;\nGO\n\nEXEC sp_PrintNumbers;\nGO"
+                           "point":  "Create a procedure to show tournament matches using WHILE loop.",
+                           "code":  "-- Q59. Create a procedure to show tournament matches using WHILE loop.\r\nCREATE OR ALTER PROCEDURE sp_ShowTournamentMatchesByLoop\r\n    @tournament_id INT\r\nAS\r\nBEGIN\r\n    DECLARE @current_row INT;\r\n    DECLARE @total_rows INT;\r\n\r\n    SET @current_row = 1;\r\n\r\n    DECLARE @MatchSource TABLE (\r\n        row_no INT PRIMARY KEY,\r\n        match_id INT,\r\n        tournament_title NVARCHAR(100),\r\n        team_one NVARCHAR(80),\r\n        team_two NVARCHAR(80),\r\n        winner_team NVARCHAR(80),\r\n        team1_score INT,\r\n        team2_score INT,\r\n        played_at DATETIME\r\n    );\r\n\r\n    DECLARE @MatchResult TABLE (\r\n        match_id INT,\r\n        tournament_title NVARCHAR(100),\r\n        team_one NVARCHAR(80),\r\n        team_two NVARCHAR(80),\r\n        winner_team NVARCHAR(80),\r\n        team1_score INT,\r\n        team2_score INT,\r\n        played_at DATETIME\r\n    );\r\n\r\n    INSERT INTO @MatchSource (\r\n        row_no,\r\n        match_id,\r\n        tournament_title,\r\n        team_one,\r\n        team_two,\r\n        winner_team,\r\n        team1_score,\r\n        team2_score,\r\n        played_at\r\n    )\r\n    SELECT\r\n        ROW_NUMBER() OVER (ORDER BY m.match_id) AS row_no,\r\n        m.match_id,\r\n        t.title AS tournament_title,\r\n        team_one.team_name AS team_one,\r\n        team_two.team_name AS team_two,\r\n        ISNULL(winner.team_name, 'Not Decided') AS winner_team,\r\n        m.team1_score,\r\n        m.team2_score,\r\n        m.played_at\r\n    FROM tbl_Matches m\r\n    INNER JOIN tbl_Tournaments t\r\n        ON m.tournament_id = t.tournament_id\r\n    INNER JOIN tbl_Teams team_one\r\n        ON m.team1_id = team_one.team_id\r\n    INNER JOIN tbl_Teams team_two\r\n        ON m.team2_id = team_two.team_id\r\n    LEFT JOIN tbl_Teams winner\r\n        ON m.winner_team_id = winner.team_id\r\n    WHERE m.tournament_id = @tournament_id;\r\n\r\n    SELECT @total_rows = COUNT(*)\r\n    FROM @MatchSource;\r\n\r\n    WHILE @current_row <= @total_rows\r\n    BEGIN\r\n        INSERT INTO @MatchResult (\r\n            match_id,\r\n            tournament_title,\r\n            team_one,\r\n            team_two,\r\n            winner_team,\r\n            team1_score,\r\n            team2_score,\r\n            played_at\r\n        )\r\n        SELECT\r\n            match_id,\r\n            tournament_title,\r\n            team_one,\r\n            team_two,\r\n            winner_team,\r\n            team1_score,\r\n            team2_score,\r\n            played_at\r\n        FROM @MatchSource\r\n        WHERE row_no = @current_row;\r\n\r\n        SET @current_row = @current_row + 1;\r\n    END\r\n\r\n    SELECT *\r\n    FROM @MatchResult;\r\nEND;\r\nGO\r\n\r\nEXEC sp_ShowTournamentMatchesByLoop 1;\r\nGO"
                        }
                    ]
 };
