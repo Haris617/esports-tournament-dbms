@@ -28,20 +28,20 @@ VALUES
 (8, 7, 'PUBG Battle Cup', '2026-09-14', '2026-09-16', 'Ongoing'),
 (9, 4, 'Apex Open Qualifier', '2026-10-05', '2026-10-06', 'Upcoming');
 
-INSERT INTO tbl_Teams (team_id, tournament_id, team_name, created_at)
+INSERT INTO tbl_Teams (team_id, team_name, created_at)
 VALUES
-(1, 1, 'Falcon Fury', '2026-01-05 10:00:00'),
-(2, 1, 'Byte Bandits', '2026-01-05 10:15:00'),
-(3, 2, 'Ancient Titans', '2026-02-01 11:00:00'),
-(4, 2, 'Mystic Mids', '2026-02-01 11:15:00'),
-(5, 3, 'Goal Diggers', '2026-03-01 09:30:00'),
-(6, 3, 'Net Strikers', '2026-03-01 09:45:00'),
-(7, 4, 'Strike Core', '2026-04-05 12:00:00'),
-(8, 4, 'Flash Point', '2026-04-05 12:15:00'),
-(9, 5, 'Storm Riders', '2026-05-15 14:00:00'),
-(10, 5, 'Zone Hunters', '2026-05-15 14:15:00'),
-(11, 8, 'Reserve Squad', '2026-08-15 10:00:00'),
-(12, 8, 'Circle Breakers', '2026-08-15 10:15:00');
+(1, 'Falcon Fury', '2026-01-05 10:00:00'),
+(2, 'Byte Bandits', '2026-01-05 10:15:00'),
+(3, 'Ancient Titans', '2026-02-01 11:00:00'),
+(4, 'Mystic Mids', '2026-02-01 11:15:00'),
+(5, 'Goal Diggers', '2026-03-01 09:30:00'),
+(6, 'Net Strikers', '2026-03-01 09:45:00'),
+(7, 'Strike Core', '2026-04-05 12:00:00'),
+(8, 'Flash Point', '2026-04-05 12:15:00'),
+(9, 'Storm Riders', '2026-05-15 14:00:00'),
+(10, 'Zone Hunters', '2026-05-15 14:15:00'),
+(11, 'Reserve Squad', '2026-08-15 10:00:00'),
+(12, 'Circle Breakers', '2026-08-15 10:15:00');
 
 INSERT INTO tbl_Players (player_id, full_name, email, username, is_active_flag)
 VALUES
