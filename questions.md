@@ -106,4 +106,4 @@ This question list is copied from the question comments in `final-source-code/Fi
 
 ### Procedure With WHILE Loop
 
-59. Create a procedure to print numbers from 1 to 5.
+59. Create a procedure to show tournament matches using WHILE loop.
