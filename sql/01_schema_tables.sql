@@ -19,7 +19,6 @@ CREATE TABLE tbl_Tournaments (
 
 CREATE TABLE tbl_Teams (
     team_id INT PRIMARY KEY,
-    tournament_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Tournaments(tournament_id),
     team_name NVARCHAR(80) NOT NULL,
     created_at DATETIME NOT NULL DEFAULT(GETDATE())
 );
