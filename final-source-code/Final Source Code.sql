@@ -87,7 +87,6 @@ CREATE TABLE tbl_Tournaments (
 
 CREATE TABLE tbl_Teams (
     team_id INT PRIMARY KEY,
-    tournament_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Tournaments(tournament_id),
     team_name NVARCHAR(80) NOT NULL,
     created_at DATETIME NOT NULL DEFAULT(GETDATE())
 );
@@ -161,20 +160,20 @@ VALUES
 (8, 7, 'PUBG Battle Cup', '2026-09-14', '2026-09-16', 'Ongoing'),
 (9, 4, 'Apex Open Qualifier', '2026-10-05', '2026-10-06', 'Upcoming');
 
-INSERT INTO tbl_Teams (team_id, tournament_id, team_name, created_at)
+INSERT INTO tbl_Teams (team_id, team_name, created_at)
 VALUES
-(1, 1, 'Falcon Fury', '2026-01-05 10:00:00'),
-(2, 1, 'Byte Bandits', '2026-01-05 10:15:00'),
-(3, 2, 'Ancient Titans', '2026-02-01 11:00:00'),
-(4, 2, 'Mystic Mids', '2026-02-01 11:15:00'),
-(5, 3, 'Goal Diggers', '2026-03-01 09:30:00'),
-(6, 3, 'Net Strikers', '2026-03-01 09:45:00'),
-(7, 4, 'Strike Core', '2026-04-05 12:00:00'),
-(8, 4, 'Flash Point', '2026-04-05 12:15:00'),
-(9, 5, 'Storm Riders', '2026-05-15 14:00:00'),
-(10, 5, 'Zone Hunters', '2026-05-15 14:15:00'),
-(11, 8, 'Reserve Squad', '2026-08-15 10:00:00'),
-(12, 8, 'Circle Breakers', '2026-08-15 10:15:00');
+(1, 'Falcon Fury', '2026-01-05 10:00:00'),
+(2, 'Byte Bandits', '2026-01-05 10:15:00'),
+(3, 'Ancient Titans', '2026-02-01 11:00:00'),
+(4, 'Mystic Mids', '2026-02-01 11:15:00'),
+(5, 'Goal Diggers', '2026-03-01 09:30:00'),
+(6, 'Net Strikers', '2026-03-01 09:45:00'),
+(7, 'Strike Core', '2026-04-05 12:00:00'),
+(8, 'Flash Point', '2026-04-05 12:15:00'),
+(9, 'Storm Riders', '2026-05-15 14:00:00'),
+(10, 'Zone Hunters', '2026-05-15 14:15:00'),
+(11, 'Reserve Squad', '2026-08-15 10:00:00'),
+(12, 'Circle Breakers', '2026-08-15 10:15:00');
 
 INSERT INTO tbl_Players (player_id, full_name, email, username, is_active_flag)
 VALUES
@@ -816,20 +815,105 @@ EXEC sp_CheckPlayerStatus 1;
    4. PROCEDURE WITH WHILE LOOP
    ========================= */
 
--- Q59. Create a procedure to print numbers from 1 to 5.
+-- Q59. Create a procedure to show tournament matches using WHILE loop.
 EXEC(N'
-CREATE OR ALTER PROCEDURE sp_PrintNumbers
+CREATE OR ALTER PROCEDURE sp_ShowTournamentMatchesByLoop
+    @tournament_id INT
 AS
 BEGIN
-    DECLARE @num INT;
-    SET @num = 1;
+    DECLARE @current_row INT;
+    DECLARE @total_rows INT;
 
-    WHILE @num <= 5
+    SET @current_row = 1;
+
+    DECLARE @MatchSource TABLE (
+        row_no INT PRIMARY KEY,
+        match_id INT,
+        tournament_title NVARCHAR(100),
+        team_one NVARCHAR(80),
+        team_two NVARCHAR(80),
+        winner_team NVARCHAR(80),
+        team1_score INT,
+        team2_score INT,
+        played_at DATETIME
+    );
+
+    DECLARE @MatchResult TABLE (
+        match_id INT,
+        tournament_title NVARCHAR(100),
+        team_one NVARCHAR(80),
+        team_two NVARCHAR(80),
+        winner_team NVARCHAR(80),
+        team1_score INT,
+        team2_score INT,
+        played_at DATETIME
+    );
+
+    INSERT INTO @MatchSource (
+        row_no,
+        match_id,
+        tournament_title,
+        team_one,
+        team_two,
+        winner_team,
+        team1_score,
+        team2_score,
+        played_at
+    )
+    SELECT
+        ROW_NUMBER() OVER (ORDER BY m.match_id) AS row_no,
+        m.match_id,
+        t.title AS tournament_title,
+        team_one.team_name AS team_one,
+        team_two.team_name AS team_two,
+        ISNULL(winner.team_name, ''Not Decided'') AS winner_team,
+        m.team1_score,
+        m.team2_score,
+        m.played_at
+    FROM tbl_Matches m
+    INNER JOIN tbl_Tournaments t
+        ON m.tournament_id = t.tournament_id
+    INNER JOIN tbl_Teams team_one
+        ON m.team1_id = team_one.team_id
+    INNER JOIN tbl_Teams team_two
+        ON m.team2_id = team_two.team_id
+    LEFT JOIN tbl_Teams winner
+        ON m.winner_team_id = winner.team_id
+    WHERE m.tournament_id = @tournament_id;
+
+    SELECT @total_rows = COUNT(*)
+    FROM @MatchSource;
+
+    WHILE @current_row <= @total_rows
     BEGIN
-        PRINT @num;
-        SET @num = @num + 1;
+        INSERT INTO @MatchResult (
+            match_id,
+            tournament_title,
+            team_one,
+            team_two,
+            winner_team,
+            team1_score,
+            team2_score,
+            played_at
+        )
+        SELECT
+            match_id,
+            tournament_title,
+            team_one,
+            team_two,
+            winner_team,
+            team1_score,
+            team2_score,
+            played_at
+        FROM @MatchSource
+        WHERE row_no = @current_row;
+
+        SET @current_row = @current_row + 1;
     END
+
+    SELECT *
+    FROM @MatchResult;
 END;
 ');
 
-EXEC sp_PrintNumbers;
+EXEC sp_ShowTournamentMatchesByLoop 1;
