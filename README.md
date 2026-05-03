@@ -51,7 +51,7 @@ The system supports:
 - Game records such as Valorant, Football, Counter Strike, Apex Legends, COD, Delta Force, PUBG, and DOTA 2.
 - Tournament records with statuses such as `Upcoming`, `Ongoing`, and `Finished`.
 - Player records with email, username, and active/inactive status.
-- Teams linked to tournaments.
+- Teams stored independently from tournaments.
 - Player membership in teams through a bridge table.
 - Registration rows connecting tournaments, teams, and matches.
 - Match records with two teams, scores, winner, and match date/time.
@@ -65,7 +65,7 @@ More detail is available in [Project Scenario](docs/project_scenario.md).
 | --- | --- |
 | `tbl_Games` | Stores game information such as name, genre, and max team size. |
 | `tbl_Tournaments` | Stores tournament events and links each tournament to one game. |
-| `tbl_Teams` | Stores teams participating in tournaments. |
+| `tbl_Teams` | Stores team details such as team name and creation date. |
 | `tbl_Players` | Stores registered player details and active/inactive status. |
 | `tbl_TeamPlayers` | Bridge table for the many-to-many relationship between players and teams. |
 | `tbl_Matches` | Stores match details, competing teams, scores, winner, and play time. |
@@ -110,7 +110,7 @@ This project demonstrates:
 - Non-parameterized procedure to show all active players
 - Parameterized procedure to show tournaments by status
 - Procedure with `IF ELSE` to check player status
-- Procedure with `WHILE` loop to print numbers from 1 to 5
+- Procedure with `WHILE` loop to show tournament matches
 
 See [Requirements Coverage](docs/requirements_coverage.md) for the mapped checklist.
 
