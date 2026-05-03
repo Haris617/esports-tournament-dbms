@@ -6,7 +6,7 @@ This project is based on an esports tournament management system. The system is 
 
 ## Problem Statement
 
-Managing esports events manually can become confusing because one tournament may have many teams, each team may have multiple players, and every match needs scores, winners, and timing details. Registration and prize records also need to be stored clearly for each tournament.
+Managing esports events manually can become confusing because one tournament may have many registered teams, each team may have multiple players, and every match needs scores, winners, and timing details. Registration and prize records also need to be stored clearly for each tournament.
 
 This database solves that problem by organizing the tournament data into related tables.
 
@@ -16,7 +16,7 @@ The system stores games such as Valorant, DOTA 2, Football, Counter Strike, Apex
 
 Tournaments are created for these games. Each tournament has a title, start date, end date, and status. A tournament can be `Upcoming`, `Ongoing`, or `Finished`.
 
-Players register in the system with their full name, email, username, and active/inactive status. Teams are then created for tournaments. A player can be part of a team through the team membership table.
+Players register in the system with their full name, email, username, and active/inactive status. Teams are created independently, and registration rows place those teams into tournament matches. A player can be part of a team through the team membership table.
 
 Matches are recorded between two teams. Each match stores both teams, the winner team, the scores, and the date and time when the match was played.
 
@@ -39,8 +39,8 @@ Prize records are connected to tournaments and winning teams. Each prize has a p
 
 - One game can have many tournaments.
 - One tournament belongs to one game.
-- One tournament can have many teams.
-- One team belongs to one tournament.
+- One tournament can have many registered teams through registration records.
+- One team can appear in different tournament registrations.
 - One player can join multiple teams across different events.
 - One team can have multiple players.
 - One tournament can have many matches.
