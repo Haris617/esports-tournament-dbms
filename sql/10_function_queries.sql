@@ -167,20 +167,105 @@ GO
 EXEC sp_CheckPlayerStatus 1;
 GO
 
--- Q59. Create a procedure to print numbers from 1 to 5.
-CREATE OR ALTER PROCEDURE sp_PrintNumbers
+-- Q59. Create a procedure to show tournament matches using WHILE loop.
+CREATE OR ALTER PROCEDURE sp_ShowTournamentMatchesByLoop
+    @tournament_id INT
 AS
 BEGIN
-    DECLARE @num INT;
-    SET @num = 1;
+    DECLARE @current_row INT;
+    DECLARE @total_rows INT;
 
-    WHILE @num <= 5
+    SET @current_row = 1;
+
+    DECLARE @MatchSource TABLE (
+        row_no INT PRIMARY KEY,
+        match_id INT,
+        tournament_title NVARCHAR(100),
+        team_one NVARCHAR(80),
+        team_two NVARCHAR(80),
+        winner_team NVARCHAR(80),
+        team1_score INT,
+        team2_score INT,
+        played_at DATETIME
+    );
+
+    DECLARE @MatchResult TABLE (
+        match_id INT,
+        tournament_title NVARCHAR(100),
+        team_one NVARCHAR(80),
+        team_two NVARCHAR(80),
+        winner_team NVARCHAR(80),
+        team1_score INT,
+        team2_score INT,
+        played_at DATETIME
+    );
+
+    INSERT INTO @MatchSource (
+        row_no,
+        match_id,
+        tournament_title,
+        team_one,
+        team_two,
+        winner_team,
+        team1_score,
+        team2_score,
+        played_at
+    )
+    SELECT
+        ROW_NUMBER() OVER (ORDER BY m.match_id) AS row_no,
+        m.match_id,
+        t.title AS tournament_title,
+        team_one.team_name AS team_one,
+        team_two.team_name AS team_two,
+        ISNULL(winner.team_name, 'Not Decided') AS winner_team,
+        m.team1_score,
+        m.team2_score,
+        m.played_at
+    FROM tbl_Matches m
+    INNER JOIN tbl_Tournaments t
+        ON m.tournament_id = t.tournament_id
+    INNER JOIN tbl_Teams team_one
+        ON m.team1_id = team_one.team_id
+    INNER JOIN tbl_Teams team_two
+        ON m.team2_id = team_two.team_id
+    LEFT JOIN tbl_Teams winner
+        ON m.winner_team_id = winner.team_id
+    WHERE m.tournament_id = @tournament_id;
+
+    SELECT @total_rows = COUNT(*)
+    FROM @MatchSource;
+
+    WHILE @current_row <= @total_rows
     BEGIN
-        PRINT @num;
-        SET @num = @num + 1;
+        INSERT INTO @MatchResult (
+            match_id,
+            tournament_title,
+            team_one,
+            team_two,
+            winner_team,
+            team1_score,
+            team2_score,
+            played_at
+        )
+        SELECT
+            match_id,
+            tournament_title,
+            team_one,
+            team_two,
+            winner_team,
+            team1_score,
+            team2_score,
+            played_at
+        FROM @MatchSource
+        WHERE row_no = @current_row;
+
+        SET @current_row = @current_row + 1;
     END
+
+    SELECT *
+    FROM @MatchResult;
 END;
 GO
 
-EXEC sp_PrintNumbers;
+EXEC sp_ShowTournamentMatchesByLoop 1;
 GO
