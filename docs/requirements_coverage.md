@@ -10,7 +10,7 @@ This file maps the DBMS project requirements to the files included in this repos
 | ERD / EERD visual | Covered | `Enhanced-ERD/visual-erd.svg`, `Enhanced-ERD/visual-erd.html`, and `docs/database_design.md`. |
 | Split SQL work clearly | Covered | `sql/` contains numbered files by topic. |
 | Final source preserved | Covered | `final-source-code/Final Source Code.sql`. |
-| Question numbering | Covered | `Q1` to `Q59` are continuous in the final source, split SQL, `questions.md`, and GUI. |
+| Question numbering | Covered | `Q1` to `Q60` are continuous in the final source, split SQL, `questions.md`, and GUI. |
 | GUI presentation | Covered | `gui/index.html`, `gui/style.css`, and `gui/app.js`. |
 
 ## DDL Commands
