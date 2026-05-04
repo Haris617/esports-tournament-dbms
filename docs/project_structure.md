@@ -5,7 +5,7 @@ This folder is arranged so the DBMS project is easy to upload to GitHub, review,
 ## Main Files
 
 - `README.md` - Main GitHub documentation.
-- `questions.md` - Full DBMS question list matching `Q1` to `Q59`.
+- `questions.md` - Full DBMS question list matching `Q1` to `Q60`.
 - `index.html` - Redirects GitHub Pages visitors to the GUI folder.
 - `run_all.sql` - Runs the full project using SQLCMD `:r` include commands.
 - `.gitignore` - Excludes common local SQL Server and editor files.
