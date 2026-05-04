@@ -5,7 +5,7 @@ GO
    JOIN QUERIES
    ========================= */
 
--- Q44. Use INNER JOIN to show registration details.
+-- Q45. Use INNER JOIN to show registration details.
 SELECT r.registeration_id,
        g.game_name,
        t.title AS tournament_title,
@@ -21,8 +21,7 @@ INNER JOIN tbl_Matches m
 INNER JOIN tbl_Teams tm
     ON r.team_id = tm.team_id
 
-
--- Q45. Use LEFT JOIN to show all players and their teams.
+-- Q46. Use LEFT JOIN to show all players and their teams.
 SELECT p.full_name,
        p.username,
        tp.membership_status,
@@ -33,9 +32,7 @@ LEFT JOIN tbl_TeamPlayers tp
 LEFT JOIN tbl_Teams tm
     ON tp.team_id = tm.team_id
 
-
-
--- Q46. Use LEFT JOIN to show all tournaments and their registered teams.
+-- Q47. Use LEFT JOIN to show all tournaments and their registered teams.
 SELECT t.title,
        tm.team_name,
        r.match_id
@@ -45,8 +42,7 @@ LEFT JOIN tbl_Registeration r
 LEFT JOIN tbl_Teams tm
     ON r.team_id = tm.team_id
 
-
--- Q47. Use RIGHT JOIN to show all matches with winner teams.
+-- Q48. Use RIGHT JOIN to show all matches with winner teams.
 SELECT m.match_id,
        winner.team_name AS winner_team_name,
        m.team1_score,
@@ -57,7 +53,7 @@ RIGHT JOIN tbl_Matches m
     ON winner.team_id = m.winner_team_id
 ORDER BY m.match_id;
 
--- Q48. Use FULL JOIN to show tournaments and prizes.
+-- Q49. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title,
        p.prize_title,
        p.position,
@@ -66,8 +62,7 @@ FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
     ON t.tournament_id = p.tournament_id
 
-
--- Q49. Use SELF JOIN to show teams playing against each other.
+-- Q50. Use SELF JOIN to show teams playing against each other.
 SELECT t.title,
        r1.match_id,
        team_a.team_name AS team_one,
