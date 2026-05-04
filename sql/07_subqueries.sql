@@ -2,10 +2,10 @@ USE [DB];
 GO
 
 /* =========================
-   SUBQUERIES
+   SUBQUERY COMMANDS
    ========================= */
 
--- Q31. IN Subquery: Show teams that are registered.
+-- Q32. IN Subquery: Show teams that are registered.
 SELECT *
 FROM tbl_Teams
 WHERE team_id IN (
@@ -13,8 +13,7 @@ WHERE team_id IN (
     FROM tbl_Registeration
 );
 
-
--- Q32. NOT IN Subquery: Show tournaments that have no matches.
+-- Q33. NOT IN Subquery: Show tournaments that have no matches.
 SELECT *
 FROM tbl_Tournaments
 WHERE tournament_id NOT IN (
@@ -22,8 +21,7 @@ WHERE tournament_id NOT IN (
     FROM tbl_Matches
 );
 
-
--- Q33. EXISTS Subquery: Show tournaments that have prizes.
+-- Q34. EXISTS Subquery: Show tournaments that have prizes.
 SELECT *
 FROM tbl_Tournaments t
 WHERE EXISTS (
@@ -32,8 +30,7 @@ WHERE EXISTS (
     WHERE p.tournament_id = t.tournament_id
 );
 
-
--- Q34. NOT EXISTS Subquery: Show tournaments with no registered teams.
+-- Q35. NOT EXISTS Subquery: Show tournaments with no registered teams.
 SELECT *
 FROM tbl_Tournaments t
 WHERE NOT EXISTS (
@@ -42,8 +39,7 @@ WHERE NOT EXISTS (
     WHERE r.tournament_id = t.tournament_id
 );
 
-
--- Q35. ANY Subquery: Show games bigger than any Sports game team size.
+-- Q36. ANY Subquery: Show games bigger than any Sports game team size.
 SELECT game_name, genre, max_team_size
 FROM tbl_Games
 WHERE max_team_size > ANY (
@@ -52,8 +48,7 @@ WHERE max_team_size > ANY (
     WHERE genre = 'Sports'
 );
 
-
--- Q36. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
+-- Q37. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
 SELECT game_name, genre, max_team_size
 FROM tbl_Games
 WHERE max_team_size >= ALL (
