@@ -37,73 +37,74 @@ This question list is copied from the question comments in `final-source-code/Fi
 
 22. SELECT: Show all games.
 23. WHERE: Show only active players.
-24. IN: Show tournaments with selected statuses.
-25. BETWEEN: Show tournaments between two dates.
-26. AND: Show active players whose username starts with a.
-27. OR: Show tournaments having Cup or Challenge in title.
-28. GROUP BY: Count players in each team.
-29. ORDER BY: Show games in alphabetical order.
-30. HAVING: Show teams having 2 or more players.
+24. WHERE: Show Only Inactive Players
+25. IN: Show tournaments with selected statuses.
+26. BETWEEN: Show tournaments between two dates.
+27. AND: Show active players whose username starts with a.
+28. OR: Show tournaments having Cup or Challenge in title.
+29. GROUP BY: Count players in each team.
+30. ORDER BY: Show games in alphabetical order.
+31. HAVING: Show teams having 2 or more players.
 
 ## Part C2: Subqueries
 
-31. IN Subquery: Show teams that are registered.
-32. NOT IN Subquery: Show tournaments that have no matches.
-33. EXISTS Subquery: Show tournaments that have prizes.
-34. NOT EXISTS Subquery: Show tournaments with no registered teams.
-35. ANY Subquery: Show games bigger than any Sports game team size.
-36. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
+32. IN Subquery: Show teams that are registered.
+33. NOT IN Subquery: Show tournaments that have no matches.
+34. EXISTS Subquery: Show tournaments that have prizes.
+35. NOT EXISTS Subquery: Show tournaments with no registered teams.
+36. ANY Subquery: Show games bigger than any Sports game team size.
+37. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
 
 ## Part C3: Aggregate Functions
 
 ## Part C3-A: Numeric Aggregation
 
-37. SUM: Show total prize amount.
-38. AVG: Show average total match score.
-39. COUNT: Count active players.
-40. Other Numeric Operation: Show highest and lowest prize amount.
+38. SUM: Show total prize amount.
+39. AVG: Show average total match score.
+40. COUNT: Count active players.
+41. Other Numeric Operation: Show highest and lowest prize amount.
 
 ## Part C3-B: Text / Word Aggregation
 
-41. LIKE: Show players whose email ends with arena.com.
-42. LIKE: Show players whose email starts with ali.
-43. LIKE: Show players whose full name contains rah.
+42. LIKE: Show players whose email ends with arena.com.
+43. LIKE: Show players whose email starts with ali.
+44. LIKE: Show players whose full name contains rah.
 
 ## Part F: Join Queries
 
-44. Use INNER JOIN to show registration details.
-45. Use LEFT JOIN to show all players and their teams.
-46. Use LEFT JOIN to show all tournaments and their registered teams.
-47. Use RIGHT JOIN to show all matches with winner teams.
-48. Use FULL JOIN to show tournaments and prizes.
-49. Use SELF JOIN to show teams playing against each other.
+45. Use INNER JOIN to show registration details.
+46. Use LEFT JOIN to show all players and their teams.
+47. Use LEFT JOIN to show all tournaments and their registered teams.
+48. Use RIGHT JOIN to show all matches with winner teams.
+49. Use FULL JOIN to show tournaments and prizes.
+50. Use SELF JOIN to show teams playing against each other.
 
 ## Aggregate Function Queries
 
-50. Show total, average, highest, and lowest prize amount.
-51. Count total players and show first/last player name alphabetically.
+51. Show total, average, highest, and lowest prize amount.
+52. Count total players and show first/last player name alphabetically.
 
 ## User Defined Functions
 
-52. Create a scalar function to show a fixed message.
-53. Create a scalar function to calculate total match score.
-54. Create a table-valued function to show all active players.
-55. Create a table-valued function to show tournaments by status.
+53. Create a scalar function to show a fixed message.
+54. Create a scalar function to calculate total match score.
+55. Create a table-valued function to show all active players.
+56. Create a table-valued function to show tournaments by status.
 
 ## Stored Procedures
 
 ### Non Parameteric Procedure
 
-56. Create a procedure to show all active players.
+57. Create a procedure to show all active players.
 
 ### Parameteric Procedure
 
-57. Create a procedure to show tournaments by status.
+58. Create a procedure to show tournaments by status.
 
 ### Procedure With IF ELSE
 
-58. Create a procedure to check if a player is active or inactive.
+59. Create a procedure to check if a player is active or inactive.
 
 ### Procedure With WHILE Loop
 
-59. Create a procedure to show tournament matches using WHILE loop.
+60. Create a procedure to print tournament rounds from 1 to 5.
