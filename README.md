@@ -6,7 +6,7 @@ The canonical final SQL source is preserved here:
 
 [final-source-code/Final Source Code.sql](<final-source-code/Final Source Code.sql>)
 
-The same work is also split into numbered files inside [sql/](sql/) so it is easier to review and run in SSMS. The question numbers are now continuous from `Q1` to `Q59` across the final source, split SQL files, question list, and GUI.
+The same work is also split into numbered files inside [sql/](sql/) so it is easier to review and run in SSMS. The question numbers are now continuous from `Q1` to `Q60` across the final source, split SQL files, question list, and GUI.
 
 ![Enhanced ERD Diagram](Enhanced-ERD/visual-erd.svg)
 
@@ -29,7 +29,7 @@ The same work is also split into numbered files inside [sql/](sql/) so it is eas
 | [gui/](gui/) | Static browser GUI for presenting the project. |
 | [Enhanced-ERD/](Enhanced-ERD/) | Current diagram SVG and browser-openable HTML. |
 | [docs/](docs/) | Supporting project documentation. |
-| [questions.md](questions.md) | Clean DBMS question list matching `Q1` to `Q59`. |
+| [questions.md](questions.md) | Clean DBMS question list matching `Q1` to `Q60`. |
 | [run_all.sql](run_all.sql) | SQLCMD runner that executes all split SQL files. |
 
 ## Live GUI
@@ -110,7 +110,7 @@ This project demonstrates:
 - Non-parameterized procedure to show all active players
 - Parameterized procedure to show tournaments by status
 - Procedure with `IF ELSE` to check player status
-- Procedure with `WHILE` loop to show tournament matches
+- Procedure with `WHILE` loop to print tournament rounds from 1 to 5
 
 See [Requirements Coverage](docs/requirements_coverage.md) for the mapped checklist.
 
@@ -154,7 +154,7 @@ Open and run the files inside [sql/](sql/) in this order:
 
 - The final source is [final-source-code/Final Source Code.sql](<final-source-code/Final Source Code.sql>).
 - The split SQL files mirror the final source numbering and add SSMS-friendly `USE [DB]` and `GO` separators.
-- `questions.md` and the GUI query explorer match the same `Q1` to `Q59` sequence.
+- `questions.md` and the GUI query explorer match the same `Q1` to `Q60` sequence.
 
 ## Author
 
