@@ -345,49 +345,53 @@ SELECT *
 FROM tbl_Players
 WHERE is_active_flag = 1;
 
+-- Q24. WHERE: Show Only Inactive Players
+SELECT *
+FROM tbl_Players
+WHERE is_active_flag = 0;
 
--- Q24. IN: Show tournaments with selected statuses.
+
+-- Q25. IN: Show tournaments with selected statuses.
 SELECT *
 FROM tbl_Tournaments
 WHERE status IN ('Finished', 'Ongoing');
 
 
--- Q25. BETWEEN: Show tournaments between two dates.
+-- Q26. BETWEEN: Show tournaments between two dates.
 SELECT tournament_id, title, start_date, end_date
 FROM tbl_Tournaments
 WHERE start_date BETWEEN '2026-05-01' AND '2026-09-30';
 
 
--- Q26. AND: Show active players whose username starts with a.
+-- Q27. AND: Show active players whose username starts with a.
 SELECT *
 FROM tbl_Players
 WHERE is_active_flag = 1
   AND username LIKE 'a%';
 
 
--- Q27. OR: Show tournaments having Cup or Challenge in title.
+-- Q28. OR: Show tournaments having Cup or Challenge in title.
 SELECT *
 FROM tbl_Tournaments
 WHERE title LIKE '%Cup%'
    OR title LIKE '%Challenge%';
 
 
--- Q28. GROUP BY: Count players in each team.
+-- Q29. GROUP BY: Count players in each team.
 SELECT team_id,
        COUNT(player_id) AS total_players
 FROM tbl_TeamPlayers
 GROUP BY team_id;
 
 
--- Q29. ORDER BY: Show games in alphabetical order.
+-- Q30. ORDER BY: Show games in alphabetical order.
 SELECT *
 FROM tbl_Games
 ORDER BY game_name;
 
 
--- Q30. HAVING: Show teams having 2 or more players.
-SELECT team_id,
-       COUNT(player_id) AS total_players
+-- Q31. HAVING: Show teams having 2 or more players.
+SELECT team_id, COUNT(player_id) AS total_players
 FROM tbl_TeamPlayers
 GROUP BY team_id
 HAVING COUNT(player_id) >= 2;
@@ -398,7 +402,7 @@ HAVING COUNT(player_id) >= 2;
         PART C2: SUBQUERIES
         ========================= */
 
--- Q31. IN Subquery: Show teams that are registered.
+-- Q32. IN Subquery: Show teams that are registered.
 SELECT *
 FROM tbl_Teams
 WHERE team_id IN (
@@ -407,7 +411,7 @@ WHERE team_id IN (
 );
 
 
--- Q32. NOT IN Subquery: Show tournaments that have no matches.
+-- Q33. NOT IN Subquery: Show tournaments that have no matches.
 SELECT *
 FROM tbl_Tournaments
 WHERE tournament_id NOT IN (
@@ -416,7 +420,7 @@ WHERE tournament_id NOT IN (
 );
 
 
--- Q33. EXISTS Subquery: Show tournaments that have prizes.
+-- Q34. EXISTS Subquery: Show tournaments that have prizes.
 SELECT *
 FROM tbl_Tournaments t
 WHERE EXISTS (
@@ -426,7 +430,7 @@ WHERE EXISTS (
 );
 
 
--- Q34. NOT EXISTS Subquery: Show tournaments with no registered teams.
+-- Q35. NOT EXISTS Subquery: Show tournaments with no registered teams.
 SELECT *
 FROM tbl_Tournaments t
 WHERE NOT EXISTS (
@@ -436,7 +440,7 @@ WHERE NOT EXISTS (
 );
 
 
--- Q35. ANY Subquery: Show games bigger than any Sports game team size.
+-- Q36. ANY Subquery: Show games bigger than any Sports game team size.
 SELECT game_name, genre, max_team_size
 FROM tbl_Games
 WHERE max_team_size > ANY (
@@ -446,7 +450,7 @@ WHERE max_team_size > ANY (
 );
 
 
--- Q36. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
+-- Q37. ALL Subquery: Show games bigger than or equal to all Battle Royale game team sizes.
 SELECT game_name, genre, max_team_size
 FROM tbl_Games
 WHERE max_team_size >= ALL (
@@ -466,23 +470,23 @@ WHERE max_team_size >= ALL (
            PART C3-A: NUMERIC AGGREGATION
            ========================= */
 
--- Q37. SUM: Show total prize amount.
+-- Q38. SUM: Show total prize amount.
 SELECT SUM(prize_amount) AS total_prize_amount
 FROM tbl_Prizes;
 
 
--- Q38. AVG: Show average total match score.
+-- Q39. AVG: Show average total match score.
 SELECT AVG(team1_score + team2_score) AS average_total_match_score
 FROM tbl_Matches;
 
 
--- Q39. COUNT: Count active players.
+-- Q40. COUNT: Count active players.
 SELECT COUNT(*) AS active_player_count
 FROM tbl_Players
 WHERE is_active_flag = 1;
 
 
--- Q40. Other Numeric Operation: Show highest and lowest prize amount.
+-- Q41. Other Numeric Operation: Show highest and lowest prize amount.
 SELECT MAX(prize_amount) AS highest_prize_amount,
        MIN(prize_amount) AS lowest_prize_amount
 FROM tbl_Prizes;
@@ -493,18 +497,18 @@ FROM tbl_Prizes;
        PART C3-B: TEXT / WORD AGGREGATION
        =================================== */
 
--- Q41. LIKE: Show players whose email ends with arena.com.
+-- Q42. LIKE: Show players whose email ends with arena.com.
 SELECT full_name, email
 FROM tbl_Players
 WHERE email LIKE '%arena.com';
 
--- Q42. LIKE: Show players whose email starts with ali.
+-- Q43. LIKE: Show players whose email starts with ali.
 SELECT full_name, email
 FROM tbl_Players
 WHERE email LIKE 'ali%';
 
 
--- Q43. LIKE: Show players whose full name contains rah.
+-- Q44. LIKE: Show players whose full name contains rah.
 SELECT full_name, email
 FROM tbl_Players
 WHERE full_name LIKE '%rah%';
@@ -515,7 +519,7 @@ WHERE full_name LIKE '%rah%';
    PART F: JOIN QUERIES
    ========================= */
 
--- Q44. Use INNER JOIN to show registration details.
+-- Q45. Use INNER JOIN to show registration details.
 SELECT r.registeration_id,
        g.game_name,
        t.title AS tournament_title,
@@ -532,7 +536,7 @@ INNER JOIN tbl_Teams tm
     ON r.team_id = tm.team_id
 
 
--- Q45. Use LEFT JOIN to show all players and their teams.
+-- Q46. Use LEFT JOIN to show all players and their teams.
 SELECT p.full_name,
        p.username,
        tp.membership_status,
@@ -545,7 +549,7 @@ LEFT JOIN tbl_Teams tm
 
 
 
--- Q46. Use LEFT JOIN to show all tournaments and their registered teams.
+-- Q47. Use LEFT JOIN to show all tournaments and their registered teams.
 SELECT t.title,
        tm.team_name,
        r.match_id
@@ -556,7 +560,7 @@ LEFT JOIN tbl_Teams tm
     ON r.team_id = tm.team_id
 
 
--- Q47. Use RIGHT JOIN to show all matches with winner teams.
+-- Q48. Use RIGHT JOIN to show all matches with winner teams.
 SELECT m.match_id,
        winner.team_name AS winner_team_name,
        m.team1_score,
@@ -567,7 +571,7 @@ RIGHT JOIN tbl_Matches m
     ON winner.team_id = m.winner_team_id
 ORDER BY m.match_id;
 
--- Q48. Use FULL JOIN to show tournaments and prizes.
+-- Q49. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title,
        p.prize_title,
        p.position,
@@ -577,7 +581,7 @@ FULL JOIN tbl_Prizes p
     ON t.tournament_id = p.tournament_id
 
 
--- Q49. Use SELF JOIN to show teams playing against each other.
+-- Q50. Use SELF JOIN to show teams playing against each other.
 SELECT t.title,
        r1.match_id,
        team_a.team_name AS team_one,
@@ -606,7 +610,7 @@ INNER JOIN tbl_Teams team_b
 
 /* Numeric Aggregate Function */
 
--- Q50. Show total, average, highest, and lowest prize amount.
+-- Q51. Show total, average, highest, and lowest prize amount.
 SELECT
     SUM(prize_amount) AS total_prize_amount,
     AVG(prize_amount) AS average_prize_amount,
@@ -617,7 +621,7 @@ FROM tbl_Prizes;
 
 /* Varchar Aggregate Function */
 
--- Q51. Count total players and show first/last player name alphabetically.
+-- Q52. Count total players and show first/last player name alphabetically.
 SELECT
     COUNT(full_name) AS total_players,
     MIN(full_name) AS first_player_name,
@@ -635,8 +639,8 @@ FROM tbl_Players;
    1. SCALAR FUNCTION
    ========================= */
 
--- Q52. Create a scalar function to show a fixed message.
-CREATE OR ALTER FUNCTION dbo.fn_ProjectName()
+-- Q53. Create a scalar function to show a fixed message.
+CREATE OR ALTER FUNCTION fn_ProjectName()
 RETURNS NVARCHAR(50)
 AS
 BEGIN
@@ -651,8 +655,8 @@ SELECT dbo.fn_ProjectName() AS project_name;
    2. SCALAR FUNCTION WITH PARAMETERS AND CALCULATION
    ========================= */
 
--- Q53. Create a scalar function to calculate total match score.
-CREATE OR ALTER FUNCTION dbo.fn_TotalMatchScore
+-- Q54. Create a scalar function to calculate total match score.
+CREATE OR ALTER FUNCTION fn_TotalMatchScore
 (
     @team1_score INT,
     @team2_score INT
@@ -678,17 +682,13 @@ FROM tbl_Matches;
    3. TABLE VALUED FUNCTION
    ========================= */
 
--- Q54. Create a table-valued function to show all active players.
-CREATE OR ALTER FUNCTION dbo.fn_ShowActivePlayers()
+-- Q55. Create a table-valued function to show all active players.
+CREATE OR ALTER FUNCTION fn_ShowActivePlayers()
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT
-        player_id,
-        full_name,
-        email,
-        username
+    SELECT *
     FROM tbl_Players
     WHERE is_active_flag = 1
 );
@@ -704,8 +704,8 @@ FROM dbo.fn_ShowActivePlayers();
    4. TABLE VALUED FUNCTION WITH PARAMETER
    ========================================= */
 
--- Q55. Create a table-valued function to show tournaments by status.
-CREATE OR ALTER FUNCTION dbo.fn_TournamentsByStatus
+-- Q56. Create a table-valued function to show tournaments by status.
+CREATE OR ALTER FUNCTION fn_TournamentsByStatus
 (
     @status NVARCHAR(20)
 )
@@ -713,12 +713,7 @@ RETURNS TABLE
 AS
 RETURN
 (
-    SELECT
-        tournament_id,
-        title,
-        start_date,
-        end_date,
-        status
+    SELECT *
     FROM tbl_Tournaments
     WHERE status = @status
 );
@@ -732,25 +727,19 @@ FROM dbo.fn_TournamentsByStatus ('Ongoing')
    STORED PROCEDURES
    ========================= */
 
+    /* =========================
+       1. NON PARAMETERIC PROCEDURE
+       ========================= */
 
-/* =========================
-   1. NON PARAMETERIC PROCEDURE
-   ========================= */
+-- Q57. Create a procedure to show all active players.
 
--- Q56. Create a procedure to show all active players.
-EXEC(N'
 CREATE OR ALTER PROCEDURE sp_ShowActivePlayers
 AS
-BEGIN
-    SELECT
-        player_id,
-        full_name,
-        email,
-        username
+
+    SELECT *
     FROM tbl_Players
-    WHERE is_active_flag = 1;
-END;
-');
+    WHERE is_active_flag = 1
+
 
 EXEC sp_ShowActivePlayers;
 
@@ -760,8 +749,8 @@ EXEC sp_ShowActivePlayers;
    2. PARAMETERIC PROCEDURE
    ========================= */
 
--- Q57. Create a procedure to show tournaments by status.
-EXEC(N'
+-- Q58. Create a procedure to show tournaments by status.
+
 CREATE OR ALTER PROCEDURE sp_ShowTournamentsByStatus
     @status NVARCHAR(20)
 AS
@@ -775,7 +764,7 @@ BEGIN
     FROM tbl_Tournaments
     WHERE status = @status;
 END;
-');
+
 
 EXEC sp_ShowTournamentsByStatus 'Ongoing';
 
@@ -785,135 +774,39 @@ EXEC sp_ShowTournamentsByStatus 'Ongoing';
    3. PROCEDURE WITH IF ELSE
    ========================= */
 
--- Q58. Create a procedure to check if a player is active or inactive.
-EXEC(N'
-CREATE OR ALTER PROCEDURE sp_CheckPlayerStatus
-    @player_id INT
+-- Q59. Create a procedure to check if a player is active or inactive.
+
+CREATE PROCEDURE CheckPlayerStatus
+    @is_active_flag INT
 AS
 BEGIN
-    IF EXISTS (
-        SELECT 1
-        FROM tbl_Players
-        WHERE player_id = @player_id
-          AND is_active_flag = 1
-    )
-    BEGIN
-        SELECT ''Player is Active'' AS player_status;
-    END
+    IF @is_active_flag = 1
+        PRINT 'Player is Active';
     ELSE
-    BEGIN
-        SELECT ''Player is Inactive or Not Found'' AS player_status;
-    END
+        PRINT 'Player is Inactive';
 END;
-');
 
-EXEC sp_CheckPlayerStatus 1;
-
+EXEC CheckPlayerStatus 1;
 
 
 /* =========================
    4. PROCEDURE WITH WHILE LOOP
    ========================= */
 
--- Q59. Create a procedure to show tournament matches using WHILE loop.
-EXEC(N'
-CREATE OR ALTER PROCEDURE sp_ShowTournamentMatchesByLoop
-    @tournament_id INT
+-- Q60. Create a procedure to print tournament rounds from 1 to 5.
+
+CREATE PROCEDURE sp_PrintTournamentRounds
 AS
 BEGIN
-    DECLARE @current_row INT;
-    DECLARE @total_rows INT;
+    DECLARE @round INT = 1;
 
-    SET @current_row = 1;
-
-    DECLARE @MatchSource TABLE (
-        row_no INT PRIMARY KEY,
-        match_id INT,
-        tournament_title NVARCHAR(100),
-        team_one NVARCHAR(80),
-        team_two NVARCHAR(80),
-        winner_team NVARCHAR(80),
-        team1_score INT,
-        team2_score INT,
-        played_at DATETIME
-    );
-
-    DECLARE @MatchResult TABLE (
-        match_id INT,
-        tournament_title NVARCHAR(100),
-        team_one NVARCHAR(80),
-        team_two NVARCHAR(80),
-        winner_team NVARCHAR(80),
-        team1_score INT,
-        team2_score INT,
-        played_at DATETIME
-    );
-
-    INSERT INTO @MatchSource (
-        row_no,
-        match_id,
-        tournament_title,
-        team_one,
-        team_two,
-        winner_team,
-        team1_score,
-        team2_score,
-        played_at
-    )
-    SELECT
-        ROW_NUMBER() OVER (ORDER BY m.match_id) AS row_no,
-        m.match_id,
-        t.title AS tournament_title,
-        team_one.team_name AS team_one,
-        team_two.team_name AS team_two,
-        ISNULL(winner.team_name, ''Not Decided'') AS winner_team,
-        m.team1_score,
-        m.team2_score,
-        m.played_at
-    FROM tbl_Matches m
-    INNER JOIN tbl_Tournaments t
-        ON m.tournament_id = t.tournament_id
-    INNER JOIN tbl_Teams team_one
-        ON m.team1_id = team_one.team_id
-    INNER JOIN tbl_Teams team_two
-        ON m.team2_id = team_two.team_id
-    LEFT JOIN tbl_Teams winner
-        ON m.winner_team_id = winner.team_id
-    WHERE m.tournament_id = @tournament_id;
-
-    SELECT @total_rows = COUNT(*)
-    FROM @MatchSource;
-
-    WHILE @current_row <= @total_rows
+    WHILE @round <= 5
     BEGIN
-        INSERT INTO @MatchResult (
-            match_id,
-            tournament_title,
-            team_one,
-            team_two,
-            winner_team,
-            team1_score,
-            team2_score,
-            played_at
-        )
-        SELECT
-            match_id,
-            tournament_title,
-            team_one,
-            team_two,
-            winner_team,
-            team1_score,
-            team2_score,
-            played_at
-        FROM @MatchSource
-        WHERE row_no = @current_row;
+        PRINT 'Tournament Round:';
+        PRINT @round;
 
-        SET @current_row = @current_row + 1;
+        SET @round = @round + 1;
     END
-
-    SELECT *
-    FROM @MatchResult;
 END;
-');
 
-EXEC sp_ShowTournamentMatchesByLoop 1;
+EXEC sp_PrintTournamentRounds;
