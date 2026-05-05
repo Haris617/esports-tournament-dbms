@@ -75,7 +75,7 @@ This file maps the DBMS project requirements to the files included in this repos
 | Non-parameterized stored procedure | `sql/10_function_queries.sql` |
 | Parameterized stored procedure | `sql/10_function_queries.sql` |
 | Procedure with `IF ELSE` | `sql/10_function_queries.sql` |
-| Procedure with `WHILE` loop | `sql/10_function_queries.sql` |
+| Procedure with `WHILE` loop for prize-winning teams by tournament | `sql/10_function_queries.sql` |
 
 ## Note
 
