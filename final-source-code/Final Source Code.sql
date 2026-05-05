@@ -36,7 +36,7 @@ ALTER TABLE tbl_testTable
 DROP CONSTRAINT uq_tbl_testTable_tt_email;
 
 -- Q5. Rename a column.
-EXEC sp_rename 'tbl_testTable.tt_name', 'tt_full_name', 'COLUMN';
+EXEC sp_rename 'tbl_testTable.tt_name', 'tt_full_name';
 
 -- Q6. Add a new column.
 ALTER TABLE tbl_testTable
@@ -51,7 +51,7 @@ WHERE tt_status IS NULL;
 ALTER TABLE tbl_testTable
 DROP COLUMN tt_status;
 
--- Q9. Change a column data type.
+-- Q9. Change a column data type (NVARCHAR -> INT)
 ALTER TABLE tbl_testTable
 ALTER COLUMN tt_age INT NULL;
 
@@ -78,11 +78,11 @@ CREATE TABLE tbl_Games (
 
 CREATE TABLE tbl_Tournaments (
     tournament_id INT PRIMARY KEY,
-    game_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Games(game_id),
     title NVARCHAR(100) NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    status NVARCHAR(20) NOT NULL
+    status NVARCHAR(20) NOT NULL,
+    game_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Games(game_id)
 );
 
 CREATE TABLE tbl_Teams (
@@ -101,20 +101,20 @@ CREATE TABLE tbl_Players (
 
 CREATE TABLE tbl_TeamPlayers (
     team_player_id INT PRIMARY KEY,
+    membership_status NVARCHAR(10) NOT NULL,
     team_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Teams(team_id),
     player_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Players(player_id),
-    membership_status NVARCHAR(10) NOT NULL
 );
 
 CREATE TABLE tbl_Matches (
     match_id INT PRIMARY KEY,
+    team1_score INT NOT NULL,
+    team2_score INT NOT NULL,
+    played_at DATETIME NOT NULL,
     tournament_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Tournaments(tournament_id),
     team1_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Teams(team_id),
     team2_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Teams(team_id),
     winner_team_id INT NULL FOREIGN KEY REFERENCES tbl_Teams(team_id),
-    team1_score INT NOT NULL,
-    team2_score INT NOT NULL,
-    played_at DATETIME NOT NULL
 );
 
 CREATE TABLE tbl_Registeration (
@@ -126,11 +126,11 @@ CREATE TABLE tbl_Registeration (
 
 CREATE TABLE tbl_Prizes (
     prize_id INT PRIMARY KEY,
-    tournament_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Tournaments(tournament_id),
-    team_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Teams(team_id),
     position INT NOT NULL CHECK (position BETWEEN 1 AND 3),
     prize_title NVARCHAR(20) NOT NULL,
-    prize_amount INT NOT NULL
+    prize_amount INT NOT NULL,
+    tournament_id INT NOT NULL FOREIGN KEY REFERENCES tbl_Tournaments(tournament_id),
+    team_id INT FOREIGN KEY REFERENCES tbl_Teams(team_id),
 );
 
 /* =============================
@@ -573,30 +573,20 @@ ORDER BY m.match_id;
 
 -- Q49. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title,
-       p.prize_title,
-       p.position,
-       p.prize_amount
+       p.prize_title
+
 FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
-    ON t.tournament_id = p.tournament_id
-
+ON t.tournament_id = p.tournament_id
 
 -- Q50. Use SELF JOIN to show teams playing against each other.
-SELECT t.title,
-       r1.match_id,
-       team_a.team_name AS team_one,
-       team_b.team_name AS team_two
-FROM tbl_Registeration r1
-INNER JOIN tbl_Registeration r2
-    ON r1.tournament_id = r2.tournament_id
-   AND r1.match_id = r2.match_id
-   AND r1.team_id < r2.team_id
-INNER JOIN tbl_Tournaments t
-    ON r1.tournament_id = t.tournament_id
-INNER JOIN tbl_Teams team_a
-    ON r1.team_id = team_a.team_id
-INNER JOIN tbl_Teams team_b
-    ON r2.team_id = team_b.team_id
+
+SELECT T1.team_name AS Team_1, T2.team_name AS Team_2
+FROM tbl_Matches M
+INNER JOIN tbl_Teams T1
+ON M.team1_id = T1.team_id
+INNER JOIN tbl_Teams T2
+ON M.team2_id = T2.team_id;
 
 /*=========================
         FUNCTIONS
@@ -622,6 +612,7 @@ FROM tbl_Prizes;
 /* Varchar Aggregate Function */
 
 -- Q52. Count total players and show first/last player name alphabetically.
+
 SELECT
     COUNT(full_name) AS total_players,
     MIN(full_name) AS first_player_name,
@@ -639,32 +630,35 @@ FROM tbl_Players;
    1. SCALAR FUNCTION
    ========================= */
 
--- Q53. Create a scalar function to show a fixed message.
-CREATE OR ALTER FUNCTION fn_ProjectName()
-RETURNS NVARCHAR(50)
-AS
-BEGIN
-    RETURN 'Tournament Management System';
-END;
+-- Q53. Create a scalar function to display Total Teams in tbl_Teams
 
+Create or alter function fn_displayTotalMatches()
+returns INT
+as 
+begin
+    declare @totalMatches INT
+    
+    select @totalMatches = Count(*)
+    from tbl_Matches
 
-SELECT dbo.fn_ProjectName() AS project_name;
+    return @totalMatches;
+end
 
+select dbo.fn_displayTotalMatches() as totalMatches;
 
 /* =========================
    2. SCALAR FUNCTION WITH PARAMETERS AND CALCULATION
    ========================= */
 
 -- Q54. Create a scalar function to calculate total match score.
-CREATE OR ALTER FUNCTION fn_TotalMatchScore
-(
-    @team1_score INT,
-    @team2_score INT
-)
+
+CREATE OR ALTER FUNCTION fn_TotalMatchScore(@team1_score INT, @team2_score INT)
 RETURNS INT
 AS
 BEGIN
-    RETURN @team1_score + @team2_score;
+    Declare @totalScore INT
+    set @totalScore = @team1_score + @team2_score;
+    return @totalScore
 END;
 
 
@@ -694,8 +688,7 @@ RETURN
 );
 
 
-SELECT *
-FROM dbo.fn_ShowActivePlayers();
+SELECT * FROM dbo.fn_ShowActivePlayers();
 
 
 
@@ -705,10 +698,7 @@ FROM dbo.fn_ShowActivePlayers();
    ========================================= */
 
 -- Q56. Create a table-valued function to show tournaments by status.
-CREATE OR ALTER FUNCTION fn_TournamentsByStatus
-(
-    @status NVARCHAR(20)
-)
+CREATE OR ALTER FUNCTION fn_TournamentsByStatus (@status NVARCHAR(20))
 RETURNS TABLE
 AS
 RETURN
@@ -735,7 +725,7 @@ FROM dbo.fn_TournamentsByStatus ('Ongoing')
 
 CREATE OR ALTER PROCEDURE sp_ShowActivePlayers
 AS
-
+begin
     SELECT *
     FROM tbl_Players
     WHERE is_active_flag = 1
@@ -776,8 +766,7 @@ EXEC sp_ShowTournamentsByStatus 'Ongoing';
 
 -- Q59. Create a procedure to check if a player is active or inactive.
 
-CREATE PROCEDURE CheckPlayerStatus
-    @is_active_flag INT
+CREATE PROCEDURE CheckPlayerStatus (@is_active_flag INT)
 AS
 BEGIN
     IF @is_active_flag = 1
@@ -793,20 +782,30 @@ EXEC CheckPlayerStatus 1;
    4. PROCEDURE WITH WHILE LOOP
    ========================= */
 
--- Q60. Create a procedure to print tournament rounds from 1 to 5.
+-- Q60. Show Teams Who Won Price in specific Tournament
 
-CREATE PROCEDURE sp_PrintTournamentRounds
-AS
-BEGIN
-    DECLARE @round INT = 1;
+Create or ALTER Procedure sp_TeamWinningPrice(@TournamentID INT)
+as
+begin 
+    declare @teamID INT
+    set @teamID = 1
 
-    WHILE @round <= 5
-    BEGIN
-        PRINT 'Tournament Round:';
-        PRINT @round;
+    while @teamID <= 12
+    begin
+        select T.team_name
+        from tbl_Teams T
+        INNER JOIN tbl_Prizes P
+        on P.team_id = T.team_id
+        AND P.team_id = @teamID
+        AND P.tournament_id = @TournamentID;
 
-        SET @round = @round + 1;
-    END
-END;
+            set @teamID = @teamID + 1
+    end
+end
 
-EXEC sp_PrintTournamentRounds;
+EXEC sp_TeamWinningPrice 1
+
+
+
+        
+    
