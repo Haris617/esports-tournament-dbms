@@ -94,13 +94,13 @@ This project demonstrates:
 - Subqueries using `IN`, `NOT IN`, `EXISTS`, `NOT EXISTS`, `ANY`, and `ALL`
 - Aggregate functions such as `SUM`, `AVG`, `COUNT`, `MAX`, and `MIN`
 - Text search using `LIKE`
-- `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`, and `SELF JOIN`
+- Join queries using `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`, and `SELF JOIN`
 - User-defined functions
 - Stored procedures
 
 ### User-Defined Functions
 
-- Scalar function to show a fixed project message
+- Scalar function to display total matches
 - Scalar function to calculate total match score
 - Table-valued function to show all active players
 - Table-valued function to show tournaments by status
@@ -110,7 +110,7 @@ This project demonstrates:
 - Non-parameterized procedure to show all active players
 - Parameterized procedure to show tournaments by status
 - Procedure with `IF ELSE` to check player status
-- Procedure with `WHILE` loop to print tournament rounds from 1 to 5
+- Procedure with `WHILE` loop to show prize-winning teams in a specific tournament
 
 See [Requirements Coverage](docs/requirements_coverage.md) for the mapped checklist.
 
