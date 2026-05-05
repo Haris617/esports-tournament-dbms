@@ -675,7 +675,7 @@ const relationships = [
 const coverage = [
     {
         "title":  "Canonical source",
-        "text":  "Final Source Code.sql is renumbered from Q1 to Q60 and drives the rest of the project."
+        "text":  "Final Source Code.sql uses continuous Q1 to Q60 numbering and drives the rest of the project."
     },
     {
         "title":  "Core schema",
@@ -690,12 +690,24 @@ const coverage = [
         "text":  "Main tables include inserts, updates with WHERE/BETWEEN/IN/GROUP BY/HAVING, deletes, and soft delete."
     },
     {
-        "title":  "DRL and subqueries",
-        "text":  "SELECT, WHERE, IN, BETWEEN, AND, OR, GROUP BY, ORDER BY, HAVING, IN, NOT IN, EXISTS, NOT EXISTS, ANY, and ALL."
+        "title":  "DRL clauses",
+        "text":  "SELECT, WHERE, IN, BETWEEN, AND, OR, GROUP BY, ORDER BY, and HAVING."
     },
     {
-        "title":  "Aggregates and joins",
-        "text":  "SUM, AVG, COUNT, MAX, MIN, LIKE, INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, and SELF JOIN."
+        "title":  "Subqueries",
+        "text":  "IN, NOT IN, EXISTS, NOT EXISTS, ANY, and ALL."
+    },
+    {
+        "title":  "Aggregate functions",
+        "text":  "SUM, AVG, COUNT, MAX, and MIN."
+    },
+    {
+        "title":  "Text search",
+        "text":  "LIKE queries for email and full-name filtering."
+    },
+    {
+        "title":  "Join queries",
+        "text":  "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, and SELF JOIN."
     },
     {
         "title":  "Reusable SQL logic",
@@ -1089,13 +1101,13 @@ const queries = {
                       "title":  "Q49. Use FULL JOIN to show tournaments and prizes.",
                       "badge":  "Q49",
                       "point":  "Use FULL JOIN to show tournaments and prizes.",
-                      "code":  "-- Q49. Use FULL JOIN to show tournaments and prizes.\r\nSELECT t.title,\r\n       p.prize_title,\r\n       p.position,\r\n       p.prize_amount\r\nFROM tbl_Tournaments t\r\nFULL JOIN tbl_Prizes p\r\n    ON t.tournament_id = p.tournament_id"
+                      "code":  "-- Q49. Use FULL JOIN to show tournaments and prizes.\r\nSELECT t.title,\r\n       p.prize_title\r\nFROM tbl_Tournaments t\r\nFULL JOIN tbl_Prizes p\r\n    ON t.tournament_id = p.tournament_id"
                   },
                   {
                       "title":  "Q50. Use SELF JOIN to show teams playing against each other.",
                       "badge":  "Q50",
                       "point":  "Use SELF JOIN to show teams playing against each other.",
-                      "code":  "-- Q50. Use SELF JOIN to show teams playing against each other.\r\nSELECT t.title,\r\n       r1.match_id,\r\n       team_a.team_name AS team_one,\r\n       team_b.team_name AS team_two\r\nFROM tbl_Registeration r1\r\nINNER JOIN tbl_Registeration r2\r\n    ON r1.tournament_id = r2.tournament_id\r\n   AND r1.match_id = r2.match_id\r\n   AND r1.team_id \u003c r2.team_id\r\nINNER JOIN tbl_Tournaments t\r\n    ON r1.tournament_id = t.tournament_id\r\nINNER JOIN tbl_Teams team_a\r\n    ON r1.team_id = team_a.team_id\r\nINNER JOIN tbl_Teams team_b\r\n    ON r2.team_id = team_b.team_id"
+                      "code":  "-- Q50. Use SELF JOIN to show teams playing against each other.\r\nSELECT T1.team_name AS Team_1, T2.team_name AS Team_2\r\nFROM tbl_Matches M\r\nINNER JOIN tbl_Teams T1\r\n    ON M.team1_id = T1.team_id\r\nINNER JOIN tbl_Teams T2\r\n    ON M.team2_id = T2.team_id;"
                   }
               ],
     "Functions":  [
@@ -1112,10 +1124,10 @@ const queries = {
                           "code":  "-- Q52. Count total players and show first/last player name alphabetically.\r\nSELECT\r\n    COUNT(full_name) AS total_players,\r\n    MIN(full_name) AS first_player_name,\r\n    MAX(full_name) AS last_player_name\r\nFROM tbl_Players;"
                       },
                       {
-                          "title":  "Q53. Create a scalar function to show a fixed message.",
+                          "title":  "Q53. Create a scalar function to display total matches.",
                           "badge":  "Q53",
-                          "point":  "Create a scalar function to show a fixed message.",
-                          "code":  "-- Q53. Create a scalar function to show a fixed message.\r\nCREATE OR ALTER FUNCTION fn_ProjectName()\r\nRETURNS NVARCHAR(50)\r\nAS\r\nBEGIN\r\n    RETURN \u0027Tournament Management System\u0027;\r\nEND;\r\n\r\n\r\nSELECT dbo.fn_ProjectName() AS project_name;"
+                          "point":  "Create a scalar function to display total matches.",
+                          "code":  "-- Q53. Create a scalar function to display total matches.\r\nCREATE OR ALTER FUNCTION fn_displayTotalMatches()\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    DECLARE @totalMatches INT;\r\n\r\n    SELECT @totalMatches = COUNT(*)\r\n    FROM tbl_Matches;\r\n\r\n    RETURN @totalMatches;\r\nEND;\r\n\r\n\r\nSELECT dbo.fn_displayTotalMatches() AS totalMatches;"
                       },
                       {
                           "title":  "Q54. Create a scalar function to calculate total match score.",
@@ -1156,10 +1168,10 @@ const queries = {
                            "code":  "-- Q59. Create a procedure to check if a player is active or inactive.\r\n\r\nCREATE PROCEDURE CheckPlayerStatus\r\n    @is_active_flag INT\r\nAS\r\nBEGIN\r\n    IF @is_active_flag = 1\r\n        PRINT \u0027Player is Active\u0027;\r\n    ELSE\r\n        PRINT \u0027Player is Inactive\u0027;\r\nEND;\r\n\r\nEXEC CheckPlayerStatus 1;"
                        },
                        {
-                           "title":  "Q60. Create a procedure to print tournament rounds from 1 to 5.",
-                           "badge":  "Q60",
-                           "point":  "Create a procedure to print tournament rounds from 1 to 5.",
-                           "code":  "-- Q60. Create a procedure to print tournament rounds from 1 to 5.\r\n\r\nCREATE PROCEDURE sp_PrintTournamentRounds\r\nAS\r\nBEGIN\r\n    DECLARE @round INT = 1;\r\n\r\n    WHILE @round \u003c= 5\r\n    BEGIN\r\n        PRINT \u0027Tournament Round:\u0027;\r\n        PRINT @round;\r\n\r\n        SET @round = @round + 1;\r\n    END\r\nEND;\r\n\r\nEXEC sp_PrintTournamentRounds;"
+                            "title":  "Q60. Show teams who won prize in a specific tournament.",
+                            "badge":  "Q60",
+                            "point":  "Show teams who won prize in a specific tournament.",
+                            "code":  "-- Q60. Show teams who won prize in a specific tournament.\r\n\r\nCREATE OR ALTER PROCEDURE sp_TeamWinningPrice\r\n    @TournamentID INT\r\nAS\r\nBEGIN\r\n    DECLARE @teamID INT;\r\n    SET @teamID = 1;\r\n\r\n    WHILE @teamID <= 12\r\n    BEGIN\r\n        SELECT T.team_name\r\n        FROM tbl_Teams T\r\n        INNER JOIN tbl_Prizes P\r\n            ON P.team_id = T.team_id\r\n           AND P.team_id = @teamID\r\n           AND P.tournament_id = @TournamentID;\r\n\r\n        SET @teamID = @teamID + 1;\r\n    END\r\nEND;\r\n\r\nEXEC sp_TeamWinningPrice 1;"
                        }
                    ]
 };
