@@ -1,6 +1,6 @@
 # Haris SQL Questions
 
-This question list is copied from the question comments in `final-source-code/Final Source Code.sql`.
+This question list follows the `Q1` to `Q60` flow from `final-source-code/Final Source Code.sql` and keeps the wording aligned with the actual SQL examples.
 
 ## Part A: DDL Commands
 
@@ -86,7 +86,7 @@ This question list is copied from the question comments in `final-source-code/Fi
 
 ## User Defined Functions
 
-53. Create a scalar function to show a fixed message.
+53. Create a scalar function to display total matches.
 54. Create a scalar function to calculate total match score.
 55. Create a table-valued function to show all active players.
 56. Create a table-valued function to show tournaments by status.
@@ -107,4 +107,4 @@ This question list is copied from the question comments in `final-source-code/Fi
 
 ### Procedure With WHILE Loop
 
-60. Create a procedure to print tournament rounds from 1 to 5.
+60. Show teams who won prize in a specific tournament.
