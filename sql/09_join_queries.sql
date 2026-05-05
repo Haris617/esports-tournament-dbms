@@ -55,27 +55,16 @@ ORDER BY m.match_id;
 
 -- Q49. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title,
-       p.prize_title,
-       p.position,
-       p.prize_amount
+       p.prize_title
 FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
     ON t.tournament_id = p.tournament_id
 
 -- Q50. Use SELF JOIN to show teams playing against each other.
-SELECT t.title,
-       r1.match_id,
-       team_a.team_name AS team_one,
-       team_b.team_name AS team_two
-FROM tbl_Registeration r1
-INNER JOIN tbl_Registeration r2
-    ON r1.tournament_id = r2.tournament_id
-   AND r1.match_id = r2.match_id
-   AND r1.team_id < r2.team_id
-INNER JOIN tbl_Tournaments t
-    ON r1.tournament_id = t.tournament_id
-INNER JOIN tbl_Teams team_a
-    ON r1.team_id = team_a.team_id
-INNER JOIN tbl_Teams team_b
-    ON r2.team_id = team_b.team_id
+SELECT T1.team_name AS Team_1, T2.team_name AS Team_2
+FROM tbl_Matches M
+INNER JOIN tbl_Teams T1
+    ON M.team1_id = T1.team_id
+INNER JOIN tbl_Teams T2
+    ON M.team2_id = T2.team_id;
 GO
