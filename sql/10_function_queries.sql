@@ -26,18 +26,23 @@ GO
    USER DEFINED FUNCTIONS
    ========================= */
 
--- Q53. Create a scalar function to show a fixed message.
-CREATE OR ALTER FUNCTION fn_ProjectName()
-RETURNS NVARCHAR(50)
+-- Q53. Create a scalar function to display total matches.
+CREATE OR ALTER FUNCTION fn_displayTotalMatches()
+RETURNS INT
 AS
 BEGIN
-    RETURN 'Tournament Management System';
+    DECLARE @totalMatches INT;
+
+    SELECT @totalMatches = COUNT(*)
+    FROM tbl_Matches;
+
+    RETURN @totalMatches;
 END;
 
 
 GO
 
-SELECT dbo.fn_ProjectName() AS project_name;
+SELECT dbo.fn_displayTotalMatches() AS totalMatches;
 GO
 
 -- Q54. Create a scalar function to calculate total match score.
@@ -160,23 +165,29 @@ GO
 EXEC CheckPlayerStatus 1;
 GO
 
--- Q60. Create a procedure to print tournament rounds from 1 to 5.
+-- Q60. Show teams who won prize in a specific tournament.
 
-CREATE PROCEDURE sp_PrintTournamentRounds
+CREATE OR ALTER PROCEDURE sp_TeamWinningPrice
+    @TournamentID INT
 AS
 BEGIN
-    DECLARE @round INT = 1;
+    DECLARE @teamID INT;
+    SET @teamID = 1;
 
-    WHILE @round <= 5
+    WHILE @teamID <= 12
     BEGIN
-        PRINT 'Tournament Round:';
-        PRINT @round;
+        SELECT T.team_name
+        FROM tbl_Teams T
+        INNER JOIN tbl_Prizes P
+            ON P.team_id = T.team_id
+           AND P.team_id = @teamID
+           AND P.tournament_id = @TournamentID;
 
-        SET @round = @round + 1;
+        SET @teamID = @teamID + 1;
     END
 END;
 
 GO
 
-EXEC sp_PrintTournamentRounds;
+EXEC sp_TeamWinningPrice 1;
 GO
