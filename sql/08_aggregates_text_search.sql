@@ -28,13 +28,13 @@ SELECT full_name, email
 FROM tbl_Players
 WHERE email LIKE '%arena.com';
 
--- Q43. LIKE: Show players whose email starts with ali.
+-- Q43. LIKE: Show players whose email starts with haris.
 SELECT full_name, email
 FROM tbl_Players
-WHERE email LIKE 'ali%';
+WHERE email LIKE 'haris%';
 
--- Q44. LIKE: Show players whose full name contains rah.
+-- Q44. LIKE: Show players whose full name contains sha.
 SELECT full_name, email
 FROM tbl_Players
-WHERE full_name LIKE '%rah%';
+WHERE full_name LIKE '%sha%';
 GO
