@@ -53,7 +53,7 @@ const db = {
                         {
                             "tournament_id":  1,
                             "game_id":  1,
-                            "title":  "Valorant Champions Cup",
+                            "title":  "Valorant Championship",
                             "start_date":  "2026-02-10",
                             "end_date":  "2026-02-12",
                             "status":  "Finished"
@@ -61,7 +61,7 @@ const db = {
                         {
                             "tournament_id":  2,
                             "game_id":  8,
-                            "title":  "DOTA 2 Masters",
+                            "title":  "DOTA 2 Championship",
                             "start_date":  "2026-03-05",
                             "end_date":  "2026-03-07",
                             "status":  "Finished"
@@ -69,7 +69,7 @@ const db = {
                         {
                             "tournament_id":  3,
                             "game_id":  2,
-                            "title":  "Football Knockout",
+                            "title":  "Football Championship",
                             "start_date":  "2026-04-15",
                             "end_date":  "2026-04-15",
                             "status":  "Finished"
@@ -77,7 +77,7 @@ const db = {
                         {
                             "tournament_id":  4,
                             "game_id":  3,
-                            "title":  "Counter Strike Showdown",
+                            "title":  "Counter Strike Championship",
                             "start_date":  "2026-05-20",
                             "end_date":  "2026-05-22",
                             "status":  "Ongoing"
@@ -85,7 +85,7 @@ const db = {
                         {
                             "tournament_id":  5,
                             "game_id":  4,
-                            "title":  "Apex Legends Trials",
+                            "title":  "Apex Legends Championship",
                             "start_date":  "2026-06-18",
                             "end_date":  "2026-06-19",
                             "status":  "Upcoming"
@@ -93,7 +93,7 @@ const db = {
                         {
                             "tournament_id":  6,
                             "game_id":  5,
-                            "title":  "COD Elite League",
+                            "title":  "COD Championship",
                             "start_date":  "2026-07-12",
                             "end_date":  "2026-07-14",
                             "status":  "Upcoming"
@@ -101,7 +101,7 @@ const db = {
                         {
                             "tournament_id":  7,
                             "game_id":  6,
-                            "title":  "Delta Force Challenge",
+                            "title":  "Delta Force Championship",
                             "start_date":  "2026-08-08",
                             "end_date":  "2026-08-10",
                             "status":  "Upcoming"
@@ -109,7 +109,7 @@ const db = {
                         {
                             "tournament_id":  8,
                             "game_id":  7,
-                            "title":  "PUBG Battle Cup",
+                            "title":  "PUBG Championship",
                             "start_date":  "2026-09-14",
                             "end_date":  "2026-09-16",
                             "status":  "Ongoing"
@@ -117,7 +117,7 @@ const db = {
                         {
                             "tournament_id":  9,
                             "game_id":  4,
-                            "title":  "Apex Open Qualifier",
+                            "title":  "Apex Legends Championship",
                             "start_date":  "2026-10-05",
                             "end_date":  "2026-10-06",
                             "status":  "Upcoming"
@@ -126,65 +126,65 @@ const db = {
     "players":  [
                     {
                         "player_id":  1,
-                        "full_name":  "Ahsan Khan",
-                        "email":  "ahsan@arena.com",
-                        "username":  "ahsanace",
+                        "full_name":  "Haris",
+                        "email":  "haris@arena.com",
+                        "username":  "haris",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  2,
-                        "full_name":  "Sara Ali",
-                        "email":  "sara@arena.com",
-                        "username":  "sara_strat",
+                        "full_name":  "Usman",
+                        "email":  "usman@arena.com",
+                        "username":  "usman",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  3,
-                        "full_name":  "Hamza Noor",
-                        "email":  "hamza@arena.com",
-                        "username":  "hamzafrag",
+                        "full_name":  "Ephraim",
+                        "email":  "ephraim@arena.com",
+                        "username":  "ephraim",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  4,
-                        "full_name":  "Zoya Iqbal",
-                        "email":  "zoya@arena.com",
-                        "username":  "zoyashot",
+                        "full_name":  "Saad",
+                        "email":  "saad@arena.com",
+                        "username":  "saad",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  5,
-                        "full_name":  "Bilal Sheikh",
-                        "email":  "bilal@arena.com",
-                        "username":  "bilalmid",
+                        "full_name":  "Shaaf",
+                        "email":  "shaaf@arena.com",
+                        "username":  "shaaf",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  6,
-                        "full_name":  "Hira Ahmed",
-                        "email":  "hira@arena.com",
-                        "username":  "hirasupport",
+                        "full_name":  "Asadullah",
+                        "email":  "asadullah@arena.com",
+                        "username":  "asadullah",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  7,
-                        "full_name":  "Daniyal Raza",
-                        "email":  "daniyal@arena.com",
-                        "username":  "daniyaldash",
+                        "full_name":  "Shafey",
+                        "email":  "shafey@arena.com",
+                        "username":  "shafey",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  8,
-                        "full_name":  "Mehak Siddiqui",
-                        "email":  "mehak@arena.com",
-                        "username":  "mehakmacro",
+                        "full_name":  "Mohid",
+                        "email":  "mohid@arena.com",
+                        "username":  "mohid",
                         "is_active_flag":  "Active"
                     },
                     {
                         "player_id":  9,
-                        "full_name":  "Aliyan Hussain",
-                        "email":  "aliyan@arena.com",
-                        "username":  "aliyanops",
+                        "full_name":  "Wahab",
+                        "email":  "wahab@arena.com",
+                        "username":  "wahab",
                         "is_active_flag":  "Inactive"
                     },
                     {
@@ -219,17 +219,17 @@ const db = {
     "teams":  [
                   {
                       "team_id":  1,
-                      "team_name":  "Falcon Fury Squad",
+                      "team_name":  "SilentStorm Squad",
                       "created_at":  "2026-01-05 10:00"
                   },
                   {
                       "team_id":  2,
-                      "team_name":  "Byte Bandits Squad",
+                      "team_name":  "ToughRiders Squad",
                       "created_at":  "2026-01-05 10:15"
                   },
                   {
                       "team_id":  3,
-                      "team_name":  "Ancient Titans Squad",
+                      "team_name":  "TonyRiders Squad",
                       "created_at":  "2026-02-01 11:00"
                   },
                   {
@@ -809,7 +809,7 @@ const queries = {
                          "title":  "Q2. Insert records into the test table.",
                          "badge":  "Q2",
                          "point":  "Insert records into the test table.",
-                         "code":  "-- Q2. Insert records into the test table.\r\nINSERT INTO tbl_testTable (tt_name, tt_email, tt_phone_number, tt_age)\r\nVALUES\r\n(\u0027Ali Khan\u0027, \u0027ali@test.com\u0027, \u002703001234567\u0027, \u002720\u0027),\r\n(\u0027Sara Ahmed\u0027, \u0027sara@test.com\u0027, \u002703111234567\u0027, \u002722\u0027),\r\n(\u0027Usman Raza\u0027, \u0027usman@test.com\u0027, \u002703221234567\u0027, \u002728\u0027);"
+                         "code":  "-- Q2. Insert records into the test table.\r\nINSERT INTO tbl_testTable (tt_name, tt_email, tt_phone_number, tt_age)\r\nVALUES\r\n(\u0027Haris\u0027, \u0027haris@test.com\u0027, \u002703001234567\u0027, \u002720\u0027),\r\n(\u0027Usman\u0027, \u0027usman@test.com\u0027, \u002703111234567\u0027, \u002722\u0027),\r\n(\u0027Ephraim\u0027, \u0027ephraim@test.com\u0027, \u002703221234567\u0027, \u002728\u0027);"
                      },
                      {
                          "title":  "Q3. Add a constraint.",
@@ -848,10 +848,10 @@ const queries = {
                          "code":  "-- Q8. Delete a column.\r\nALTER TABLE tbl_testTable\r\nDROP COLUMN tt_status;"
                      },
                      {
-                         "title":  "Q9. Change a column data type.",
+                         "title":  "Q9. Change a column data type (NVARCHAR -> INT)",
                          "badge":  "Q9",
-                         "point":  "Change a column data type.",
-                         "code":  "-- Q9. Change a column data type.\r\nALTER TABLE tbl_testTable\r\nALTER COLUMN tt_age INT NULL;"
+                         "point":  "Change a column data type (NVARCHAR -> INT)",
+                         "code":  "-- Q9. Change a column data type (NVARCHAR -> INT)\r\nALTER TABLE tbl_testTable\r\nALTER COLUMN tt_age INT NULL;"
                      },
                      {
                          "title":  "Q10. Change a column size.",
@@ -966,10 +966,10 @@ const queries = {
                     "code":  "-- Q27. AND: Show active players whose username starts with a.\r\nSELECT *\r\nFROM tbl_Players\r\nWHERE is_active_flag = 1\r\n  AND username LIKE \u0027a%\u0027;"
                 },
                 {
-                    "title":  "Q28. OR: Show tournaments having Cup or Challenge in title.",
+                    "title":  "Q28. OR: Show tournaments having Valorant or Football in title.",
                     "badge":  "Q28",
-                    "point":  "OR: Show tournaments having Cup or Challenge in title.",
-                    "code":  "-- Q28. OR: Show tournaments having Cup or Challenge in title.\r\nSELECT *\r\nFROM tbl_Tournaments\r\nWHERE title LIKE \u0027%Cup%\u0027\r\n   OR title LIKE \u0027%Challenge%\u0027;"
+                    "point":  "OR: Show tournaments having Valorant or Football in title.",
+                    "code":  "-- Q28. OR: Show tournaments having Valorant or Football in title.\r\nSELECT *\r\nFROM tbl_Tournaments\r\nWHERE title LIKE \u0027%Valorant%\u0027\r\n   OR title LIKE \u0027%Football%\u0027;"
                 },
                 {
                     "title":  "Q29. GROUP BY: Count players in each team.",
@@ -981,7 +981,7 @@ const queries = {
                     "title":  "Q30. ORDER BY: Show games in alphabetical order.",
                     "badge":  "Q30",
                     "point":  "ORDER BY: Show games in alphabetical order.",
-                    "code":  "-- Q30. ORDER BY: Show games in alphabetical order.\r\nSELECT *\r\nFROM tbl_Games\r\nORDER BY game_name;"
+                    "code":  "-- Q30. ORDER BY: Show games in alphabetical order.\r\nSELECT *\r\nFROM tbl_Games\r\nORDER BY game_name ASC;"
                 },
                 {
                     "title":  "Q31. HAVING: Show teams having 2 or more players.",
@@ -1060,16 +1060,16 @@ const queries = {
                            "code":  "-- Q42. LIKE: Show players whose email ends with arena.com.\r\nSELECT full_name, email\r\nFROM tbl_Players\r\nWHERE email LIKE \u0027%arena.com\u0027;"
                        },
                        {
-                           "title":  "Q43. LIKE: Show players whose email starts with ali.",
+                           "title":  "Q43. LIKE: Show players whose email starts with haris.",
                            "badge":  "Q43",
-                           "point":  "LIKE: Show players whose email starts with ali.",
-                           "code":  "-- Q43. LIKE: Show players whose email starts with ali.\r\nSELECT full_name, email\r\nFROM tbl_Players\r\nWHERE email LIKE \u0027ali%\u0027;"
+                           "point":  "LIKE: Show players whose email starts with haris.",
+                           "code":  "-- Q43. LIKE: Show players whose email starts with haris.\r\nSELECT full_name, email\r\nFROM tbl_Players\r\nWHERE email LIKE \u0027haris%\u0027;"
                        },
                        {
-                           "title":  "Q44. LIKE: Show players whose full name contains rah.",
+                           "title":  "Q44. LIKE: Show players whose full name contains sha.",
                            "badge":  "Q44",
-                           "point":  "LIKE: Show players whose full name contains rah.",
-                           "code":  "-- Q44. LIKE: Show players whose full name contains rah.\r\nSELECT full_name, email\r\nFROM tbl_Players\r\nWHERE full_name LIKE \u0027%rah%\u0027;"
+                           "point":  "LIKE: Show players whose full name contains sha.",
+                           "code":  "-- Q44. LIKE: Show players whose full name contains sha.\r\nSELECT full_name, email\r\nFROM tbl_Players\r\nWHERE full_name LIKE \u0027%sha%\u0027;"
                        }
                    ],
     "Joins":  [
@@ -1104,10 +1104,10 @@ const queries = {
                       "code":  "-- Q49. Use FULL JOIN to show tournaments and prizes.\r\nSELECT t.title,\r\n       p.prize_title\r\nFROM tbl_Tournaments t\r\nFULL JOIN tbl_Prizes p\r\n    ON t.tournament_id = p.tournament_id"
                   },
                   {
-                      "title":  "Q50. Use SELF JOIN to show teams playing against each other.",
+                      "title":  "Q50. Use SELF JOIN to show teams playing against each other and Winner Team.",
                       "badge":  "Q50",
-                      "point":  "Use SELF JOIN to show teams playing against each other.",
-                      "code":  "-- Q50. Use SELF JOIN to show teams playing against each other.\r\nSELECT T1.team_name AS Team_1, T2.team_name AS Team_2\r\nFROM tbl_Matches M\r\nINNER JOIN tbl_Teams T1\r\n    ON M.team1_id = T1.team_id\r\nINNER JOIN tbl_Teams T2\r\n    ON M.team2_id = T2.team_id;"
+                      "point":  "Use SELF JOIN to show teams playing against each other and Winner Team.",
+                      "code":  "-- Q50. Use SELF JOIN to show teams playing against each other and Winner Team.\r\nSELECT T1.team_name AS Team_1,\r\n       T2.team_name AS Team_2,\r\n       W.team_name AS Winner_Team\r\nFROM tbl_Matches M\r\nINNER JOIN tbl_Teams T1\r\n    ON M.team1_id = T1.team_id\r\nINNER JOIN tbl_Teams T2\r\n    ON M.team2_id = T2.team_id\r\nLEFT JOIN tbl_Teams W\r\n    ON M.winner_team_id = W.team_id;"
                   }
               ],
     "Functions":  [
@@ -1136,10 +1136,10 @@ const queries = {
                           "code":  "-- Q54. Create a scalar function to calculate total match score.\r\nCREATE OR ALTER FUNCTION fn_TotalMatchScore\r\n(\r\n    @team1_score INT,\r\n    @team2_score INT\r\n)\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    RETURN @team1_score + @team2_score;\r\nEND;\r\n\r\n\r\nSELECT\r\n    match_id,\r\n    team1_score,\r\n    team2_score,\r\n    dbo.fn_TotalMatchScore(team1_score, team2_score) AS total_score\r\nFROM tbl_Matches;"
                       },
                       {
-                          "title":  "Q55. Create a table-valued function to show all active players.",
+                          "title":  "Q55. Create a table-valued function to show all active players who are in Teams.",
                           "badge":  "Q55",
-                          "point":  "Create a table-valued function to show all active players.",
-                          "code":  "-- Q55. Create a table-valued function to show all active players.\r\nCREATE OR ALTER FUNCTION fn_ShowActivePlayers()\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Players\r\n    WHERE is_active_flag = 1\r\n);\r\n\r\n\r\nSELECT *\r\nFROM dbo.fn_ShowActivePlayers();"
+                          "point":  "Create a table-valued function to show all active players who are in Teams.",
+                          "code":  "-- Q55. Create a table-valued function to show all active players who are in Teams.\r\nCREATE OR ALTER FUNCTION fn_ShowActivePlayers()\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Players P\r\n    WHERE P.is_active_flag = 1\r\n      AND P.player_id IN (\r\n          SELECT TP.player_id\r\n          FROM tbl_TeamPlayers TP\r\n      )\r\n);\r\n\r\n\r\nSELECT * FROM dbo.fn_ShowActivePlayers();"
                       },
                       {
                           "title":  "Q56. Create a table-valued function to show tournaments by status.",
@@ -1153,7 +1153,7 @@ const queries = {
                            "title":  "Q57. Create a procedure to show all active players.",
                            "badge":  "Q57",
                            "point":  "Create a procedure to show all active players.",
-                           "code":  "-- Q57. Create a procedure to show all active players.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowActivePlayers\r\nAS\r\n\r\n    SELECT *\r\n    FROM tbl_Players\r\n    WHERE is_active_flag = 1\r\n\r\n\r\nEXEC sp_ShowActivePlayers;"
+                           "code":  "-- Q57. Create a procedure to show all active players.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowActivePlayers\r\nAS\r\nBEGIN\r\n    SELECT *\r\n    FROM tbl_Players\r\n    WHERE is_active_flag = 1\r\nEND\r\n\r\n\r\nEXEC sp_ShowActivePlayers;"
                        },
                        {
                            "title":  "Q58. Create a procedure to show tournaments by status.",
