@@ -23,9 +23,9 @@ CREATE TABLE tbl_testTable (
 -- Q2. Insert records into the test table.
 INSERT INTO tbl_testTable (tt_name, tt_email, tt_phone_number, tt_age)
 VALUES
-('Ali Khan', 'ali@test.com', '03001234567', '20'),
-('Sara Ahmed', 'sara@test.com', '03111234567', '22'),
-('Usman Raza', 'usman@test.com', '03221234567', '28');
+('Haris', 'haris@test.com', '03001234567', '20'),
+('Usman', 'usman@test.com', '03111234567', '22'),
+('Ephraim', 'ephraim@test.com', '03221234567', '28');
 
 -- Q3. Add a constraint.
 ALTER TABLE tbl_testTable
@@ -150,21 +150,21 @@ VALUES
 
 INSERT INTO tbl_Tournaments (tournament_id, game_id, title, start_date, end_date, status)
 VALUES
-(1, 1, 'Valorant Champions Cup', '2026-02-10', '2026-02-12', 'Finished'),
-(2, 8, 'DOTA 2 Masters', '2026-03-05', '2026-03-07', 'Finished'),
-(3, 2, 'Football Knockout', '2026-04-15', '2026-04-15', 'Finished'),
-(4, 3, 'Counter Strike Showdown', '2026-05-20', '2026-05-22', 'Upcoming'),
-(5, 4, 'Apex Legends Trials', '2026-06-18', '2026-06-19', 'Upcoming'),
-(6, 5, 'COD Elite League', '2026-07-12', '2026-07-14', 'Upcoming'),
-(7, 6, 'Delta Force Challenge', '2026-08-08', '2026-08-10', 'Upcoming'),
-(8, 7, 'PUBG Battle Cup', '2026-09-14', '2026-09-16', 'Ongoing'),
-(9, 4, 'Apex Open Qualifier', '2026-10-05', '2026-10-06', 'Upcoming');
+(1, 1, 'Valorant Championship', '2026-02-10', '2026-02-12', 'Finished'),
+(2, 8, 'DOTA 2 Championship', '2026-03-05', '2026-03-07', 'Finished'),
+(3, 2, 'Football Championship', '2026-04-15', '2026-04-15', 'Finished'),
+(4, 3, 'Counter Strike Championship', '2026-05-20', '2026-05-22', 'Upcoming'),
+(5, 4, 'Apex Legends Championship', '2026-06-18', '2026-06-19', 'Upcoming'),
+(6, 5, 'COD Championship', '2026-07-12', '2026-07-14', 'Upcoming'),
+(7, 6, 'Delta Force Championship', '2026-08-08', '2026-08-10', 'Upcoming'),
+(8, 7, 'PUBG Championship', '2026-09-14', '2026-09-16', 'Ongoing'),
+(9, 4, 'Apex Legends Championship', '2026-10-05', '2026-10-06', 'Upcoming');
 
 INSERT INTO tbl_Teams (team_id, team_name, created_at)
 VALUES
-(1, 'Falcon Fury', '2026-01-05 10:00:00'),
-(2, 'Byte Bandits', '2026-01-05 10:15:00'),
-(3, 'Ancient Titans', '2026-02-01 11:00:00'),
+(1, 'SilentStorm', '2026-01-05 10:00:00'),
+(2, 'ToughRiders', '2026-01-05 10:15:00'),
+(3, 'TonyRiders', '2026-02-01 11:00:00'),
 (4, 'Mystic Mids', '2026-02-01 11:15:00'),
 (5, 'Goal Diggers', '2026-03-01 09:30:00'),
 (6, 'Net Strikers', '2026-03-01 09:45:00'),
@@ -177,15 +177,15 @@ VALUES
 
 INSERT INTO tbl_Players (player_id, full_name, email, username, is_active_flag)
 VALUES
-(1, 'Ahsan Khan', 'ahsan@arena.com', 'ahsanace', 1),
-(2, 'Sara Ali', 'sara@arena.com', 'sara_strat', 1),
-(3, 'Hamza Noor', 'hamza@arena.com', 'hamzafrag', 1),
-(4, 'Zoya Iqbal', 'zoya@arena.com', 'zoyashot', 1),
-(5, 'Bilal Sheikh', 'bilal@arena.com', 'bilalmid', 1),
-(6, 'Hira Ahmed', 'hira@arena.com', 'hirasupport', 1),
-(7, 'Daniyal Raza', 'daniyal@arena.com', 'daniyaldash', 1),
-(8, 'Mehak Siddiqui', 'mehak@arena.com', 'mehakmacro', 1),
-(9, 'Aliyan Hussain', 'aliyan@arena.com', 'aliyanops', 0),
+(1, 'Haris', 'haris@arena.com', 'haris', 1),
+(2, 'Usman', 'usman@arena.com', 'usman', 1),
+(3, 'Ephraim', 'ephraim@arena.com', 'ephraim', 1),
+(4, 'Saad', 'saad@arena.com', 'saad', 1),
+(5, 'Shaaf', 'shaaf@arena.com', 'shaaf', 1),
+(6, 'Asadullah', 'asadullah@arena.com', 'asadullah', 1),
+(7, 'Shafey', 'shafey@arena.com', 'shafey', 1),
+(8, 'Mohid', 'mohid@arena.com', 'mohid', 1),
+(9, 'Wahab', 'wahab@arena.com', 'wahab', 0),
 (10, 'Komal Fatima', 'komal@arena.com', 'komalzone', 0),
 (11, 'Umar Farooq', 'umar@arena.com', 'umarcarry', 1),
 (12, 'Iman Tariq', 'iman@arena.com', 'imantactics', 1),
@@ -305,7 +305,6 @@ WHERE team_id IN (
     HAVING COUNT(player_id) >= 2
 );
 
-
 /* =========================
    DELETE OPERATIONS
    ========================= */
@@ -370,16 +369,15 @@ WHERE is_active_flag = 1
   AND username LIKE 'a%';
 
 
--- Q28. OR: Show tournaments having Cup or Challenge in title.
+-- Q28. OR: Show tournaments having Valorant or Football in title.
 SELECT *
 FROM tbl_Tournaments
-WHERE title LIKE '%Cup%'
-   OR title LIKE '%Challenge%';
+WHERE title LIKE '%Valorant%'
+   OR title LIKE '%Football%';
 
 
 -- Q29. GROUP BY: Count players in each team.
-SELECT team_id,
-       COUNT(player_id) AS total_players
+SELECT team_id, COUNT(player_id) AS total_players
 FROM tbl_TeamPlayers
 GROUP BY team_id;
 
@@ -387,7 +385,7 @@ GROUP BY team_id;
 -- Q30. ORDER BY: Show games in alphabetical order.
 SELECT *
 FROM tbl_Games
-ORDER BY game_name;
+ORDER BY game_name ASC;
 
 
 -- Q31. HAVING: Show teams having 2 or more players.
@@ -492,7 +490,6 @@ SELECT MAX(prize_amount) AS highest_prize_amount,
 FROM tbl_Prizes;
 
 
-
     /* ===================================
        PART C3-B: TEXT / WORD AGGREGATION
        =================================== */
@@ -502,16 +499,16 @@ SELECT full_name, email
 FROM tbl_Players
 WHERE email LIKE '%arena.com';
 
--- Q43. LIKE: Show players whose email starts with ali.
+-- Q43. LIKE: Show players whose email starts with haris.
 SELECT full_name, email
 FROM tbl_Players
-WHERE email LIKE 'ali%';
+WHERE email LIKE 'haris%';
 
 
--- Q44. LIKE: Show players whose full name contains rah.
+-- Q44. LIKE: Show players whose full name contains sha.
 SELECT full_name, email
 FROM tbl_Players
-WHERE full_name LIKE '%rah%';
+WHERE full_name LIKE '%sha%';
 
 
 
@@ -572,21 +569,23 @@ RIGHT JOIN tbl_Matches m
 ORDER BY m.match_id;
 
 -- Q49. Use FULL JOIN to show tournaments and prizes.
-SELECT t.title,
-       p.prize_title
-
+SELECT t.title, p.prize_title
 FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
 ON t.tournament_id = p.tournament_id
 
--- Q50. Use SELF JOIN to show teams playing against each other.
+-- Q50. Use SELF JOIN to show teams playing against each other and Winner Team
 
-SELECT T1.team_name AS Team_1, T2.team_name AS Team_2
+SELECT T1.team_name AS Team_1,
+       T2.team_name AS Team_2,
+       W.team_name AS Winner_Team
 FROM tbl_Matches M
 INNER JOIN tbl_Teams T1
 ON M.team1_id = T1.team_id
 INNER JOIN tbl_Teams T2
-ON M.team2_id = T2.team_id;
+ON M.team2_id = T2.team_id
+LEFT JOIN tbl_Teams W
+ON M.winner_team_id = W.team_id;
 
 /*=========================
         FUNCTIONS
@@ -630,7 +629,7 @@ FROM tbl_Players;
    1. SCALAR FUNCTION
    ========================= */
 
--- Q53. Create a scalar function to display Total Teams in tbl_Teams
+-- Q53. Create a scalar function to display total matches.
 
 Create or alter function fn_displayTotalMatches()
 returns INT
@@ -646,9 +645,9 @@ end
 
 select dbo.fn_displayTotalMatches() as totalMatches;
 
-/* =========================
+/* ===================================================
    2. SCALAR FUNCTION WITH PARAMETERS AND CALCULATION
-   ========================= */
+   =================================================== */
 
 -- Q54. Create a scalar function to calculate total match score.
 
@@ -676,15 +675,19 @@ FROM tbl_Matches;
    3. TABLE VALUED FUNCTION
    ========================= */
 
--- Q55. Create a table-valued function to show all active players.
+-- Q55. Create a table-valued function to show all active players who are in Teams
 CREATE OR ALTER FUNCTION fn_ShowActivePlayers()
 RETURNS TABLE
 AS
 RETURN
 (
     SELECT *
-    FROM tbl_Players
-    WHERE is_active_flag = 1
+    FROM tbl_Players P
+    WHERE P.is_active_flag = 1
+    AND P.player_id IN (
+        select TP.player_id
+        from tbl_TeamPlayers TP
+        )
 );
 
 
@@ -729,6 +732,7 @@ begin
     SELECT *
     FROM tbl_Players
     WHERE is_active_flag = 1
+end
 
 
 EXEC sp_ShowActivePlayers;
@@ -782,7 +786,7 @@ EXEC CheckPlayerStatus 1;
    4. PROCEDURE WITH WHILE LOOP
    ========================= */
 
--- Q60. Show Teams Who Won Price in specific Tournament
+-- Q60. Show teams who won prize in a specific tournament.
 
 Create or ALTER Procedure sp_TeamWinningPrice(@TournamentID INT)
 as
