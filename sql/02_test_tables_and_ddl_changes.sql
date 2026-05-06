@@ -18,9 +18,9 @@ CREATE TABLE tbl_testTable (
 -- Q2. Insert records into the test table.
 INSERT INTO tbl_testTable (tt_name, tt_email, tt_phone_number, tt_age)
 VALUES
-('Ali Khan', 'ali@test.com', '03001234567', '20'),
-('Sara Ahmed', 'sara@test.com', '03111234567', '22'),
-('Usman Raza', 'usman@test.com', '03221234567', '28');
+('Haris', 'haris@test.com', '03001234567', '20'),
+('Usman', 'usman@test.com', '03111234567', '22'),
+('Ephraim', 'ephraim@test.com', '03221234567', '28');
 
 -- Q3. Add a constraint.
 ALTER TABLE tbl_testTable
@@ -46,7 +46,7 @@ WHERE tt_status IS NULL;
 ALTER TABLE tbl_testTable
 DROP COLUMN tt_status;
 
--- Q9. Change a column data type.
+-- Q9. Change a column data type (NVARCHAR -> INT)
 ALTER TABLE tbl_testTable
 ALTER COLUMN tt_age INT NULL;
 
