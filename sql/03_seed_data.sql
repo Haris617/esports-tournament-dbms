@@ -18,21 +18,21 @@ VALUES
 
 INSERT INTO tbl_Tournaments (tournament_id, game_id, title, start_date, end_date, status)
 VALUES
-(1, 1, 'Valorant Champions Cup', '2026-02-10', '2026-02-12', 'Finished'),
-(2, 8, 'DOTA 2 Masters', '2026-03-05', '2026-03-07', 'Finished'),
-(3, 2, 'Football Knockout', '2026-04-15', '2026-04-15', 'Finished'),
-(4, 3, 'Counter Strike Showdown', '2026-05-20', '2026-05-22', 'Upcoming'),
-(5, 4, 'Apex Legends Trials', '2026-06-18', '2026-06-19', 'Upcoming'),
-(6, 5, 'COD Elite League', '2026-07-12', '2026-07-14', 'Upcoming'),
-(7, 6, 'Delta Force Challenge', '2026-08-08', '2026-08-10', 'Upcoming'),
-(8, 7, 'PUBG Battle Cup', '2026-09-14', '2026-09-16', 'Ongoing'),
-(9, 4, 'Apex Open Qualifier', '2026-10-05', '2026-10-06', 'Upcoming');
+(1, 1, 'Valorant Championship', '2026-02-10', '2026-02-12', 'Finished'),
+(2, 8, 'DOTA 2 Championship', '2026-03-05', '2026-03-07', 'Finished'),
+(3, 2, 'Football Championship', '2026-04-15', '2026-04-15', 'Finished'),
+(4, 3, 'Counter Strike Championship', '2026-05-20', '2026-05-22', 'Upcoming'),
+(5, 4, 'Apex Legends Championship', '2026-06-18', '2026-06-19', 'Upcoming'),
+(6, 5, 'COD Championship', '2026-07-12', '2026-07-14', 'Upcoming'),
+(7, 6, 'Delta Force Championship', '2026-08-08', '2026-08-10', 'Upcoming'),
+(8, 7, 'PUBG Championship', '2026-09-14', '2026-09-16', 'Ongoing'),
+(9, 4, 'Apex Legends Championship', '2026-10-05', '2026-10-06', 'Upcoming');
 
 INSERT INTO tbl_Teams (team_id, team_name, created_at)
 VALUES
-(1, 'Falcon Fury', '2026-01-05 10:00:00'),
-(2, 'Byte Bandits', '2026-01-05 10:15:00'),
-(3, 'Ancient Titans', '2026-02-01 11:00:00'),
+(1, 'SilentStorm', '2026-01-05 10:00:00'),
+(2, 'ToughRiders', '2026-01-05 10:15:00'),
+(3, 'TonyRiders', '2026-02-01 11:00:00'),
 (4, 'Mystic Mids', '2026-02-01 11:15:00'),
 (5, 'Goal Diggers', '2026-03-01 09:30:00'),
 (6, 'Net Strikers', '2026-03-01 09:45:00'),
@@ -45,15 +45,15 @@ VALUES
 
 INSERT INTO tbl_Players (player_id, full_name, email, username, is_active_flag)
 VALUES
-(1, 'Ahsan Khan', 'ahsan@arena.com', 'ahsanace', 1),
-(2, 'Sara Ali', 'sara@arena.com', 'sara_strat', 1),
-(3, 'Hamza Noor', 'hamza@arena.com', 'hamzafrag', 1),
-(4, 'Zoya Iqbal', 'zoya@arena.com', 'zoyashot', 1),
-(5, 'Bilal Sheikh', 'bilal@arena.com', 'bilalmid', 1),
-(6, 'Hira Ahmed', 'hira@arena.com', 'hirasupport', 1),
-(7, 'Daniyal Raza', 'daniyal@arena.com', 'daniyaldash', 1),
-(8, 'Mehak Siddiqui', 'mehak@arena.com', 'mehakmacro', 1),
-(9, 'Aliyan Hussain', 'aliyan@arena.com', 'aliyanops', 0),
+(1, 'Haris', 'haris@arena.com', 'haris', 1),
+(2, 'Usman', 'usman@arena.com', 'usman', 1),
+(3, 'Ephraim', 'ephraim@arena.com', 'ephraim', 1),
+(4, 'Saad', 'saad@arena.com', 'saad', 1),
+(5, 'Shaaf', 'shaaf@arena.com', 'shaaf', 1),
+(6, 'Asadullah', 'asadullah@arena.com', 'asadullah', 1),
+(7, 'Shafey', 'shafey@arena.com', 'shafey', 1),
+(8, 'Mohid', 'mohid@arena.com', 'mohid', 1),
+(9, 'Wahab', 'wahab@arena.com', 'wahab', 0),
 (10, 'Komal Fatima', 'komal@arena.com', 'komalzone', 0),
 (11, 'Umar Farooq', 'umar@arena.com', 'umarcarry', 1),
 (12, 'Iman Tariq', 'iman@arena.com', 'imantactics', 1),
