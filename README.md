@@ -102,7 +102,7 @@ This project demonstrates:
 
 - Scalar function to display total matches
 - Scalar function to calculate total match score
-- Table-valued function to show all active players
+- Table-valued function to show all active players who are in teams
 - Table-valued function to show tournaments by status
 
 ### Stored Procedures
@@ -155,6 +155,7 @@ Open and run the files inside [sql/](sql/) in this order:
 - The final source is [final-source-code/Final Source Code.sql](<final-source-code/Final Source Code.sql>).
 - The split SQL files mirror the final source numbering and add SSMS-friendly `USE [DB]` and `GO` separators.
 - `questions.md` and the GUI query explorer match the same `Q1` to `Q60` sequence.
+- Sample player/team names are synced across the final source, split SQL files, and GUI data.
 
 ## Author
 
