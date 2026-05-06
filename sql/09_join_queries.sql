@@ -60,11 +60,15 @@ FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
     ON t.tournament_id = p.tournament_id
 
--- Q50. Use SELF JOIN to show teams playing against each other.
-SELECT T1.team_name AS Team_1, T2.team_name AS Team_2
+-- Q50. Use SELF JOIN to show teams playing against each other and Winner Team.
+SELECT T1.team_name AS Team_1,
+       T2.team_name AS Team_2,
+       W.team_name AS Winner_Team
 FROM tbl_Matches M
 INNER JOIN tbl_Teams T1
     ON M.team1_id = T1.team_id
 INNER JOIN tbl_Teams T2
-    ON M.team2_id = T2.team_id;
+    ON M.team2_id = T2.team_id
+LEFT JOIN tbl_Teams W
+    ON M.winner_team_id = W.team_id;
 GO
