@@ -68,15 +68,19 @@ SELECT
 FROM tbl_Matches;
 GO
 
--- Q55. Create a table-valued function to show all active players.
+-- Q55. Create a table-valued function to show all active players who are in Teams.
 CREATE OR ALTER FUNCTION fn_ShowActivePlayers()
 RETURNS TABLE
 AS
 RETURN
 (
     SELECT *
-    FROM tbl_Players
-    WHERE is_active_flag = 1
+    FROM tbl_Players P
+    WHERE P.is_active_flag = 1
+      AND P.player_id IN (
+          SELECT TP.player_id
+          FROM tbl_TeamPlayers TP
+      )
 );
 
 
@@ -115,11 +119,11 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_ShowActivePlayers
 AS
-
+BEGIN
     SELECT *
     FROM tbl_Players
     WHERE is_active_flag = 1
-
+END
 
 GO
 
