@@ -14,7 +14,7 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 6. Add a new column.
 7. Modify a column.
 8. Delete a column.
-9. Change a column data type.
+9. Change a column data type (NVARCHAR -> INT)
 10. Change a column size.
 11. Empty the test table.
 12. Delete the test table.
@@ -41,7 +41,7 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 25. IN: Show tournaments with selected statuses.
 26. BETWEEN: Show tournaments between two dates.
 27. AND: Show active players whose username starts with a.
-28. OR: Show tournaments having Cup or Challenge in title.
+28. OR: Show tournaments having Valorant or Football in title.
 29. GROUP BY: Count players in each team.
 30. ORDER BY: Show games in alphabetical order.
 31. HAVING: Show teams having 2 or more players.
@@ -67,8 +67,8 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 ## Part C3-B: Text / Word Aggregation
 
 42. LIKE: Show players whose email ends with arena.com.
-43. LIKE: Show players whose email starts with ali.
-44. LIKE: Show players whose full name contains rah.
+43. LIKE: Show players whose email starts with haris.
+44. LIKE: Show players whose full name contains sha.
 
 ## Part F: Join Queries
 
@@ -77,7 +77,7 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 47. Use LEFT JOIN to show all tournaments and their registered teams.
 48. Use RIGHT JOIN to show all matches with winner teams.
 49. Use FULL JOIN to show tournaments and prizes.
-50. Use SELF JOIN to show teams playing against each other.
+50. Use SELF JOIN to show teams playing against each other and Winner Team.
 
 ## Aggregate Function Queries
 
@@ -88,7 +88,7 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 
 53. Create a scalar function to display total matches.
 54. Create a scalar function to calculate total match score.
-55. Create a table-valued function to show all active players.
+55. Create a table-valued function to show all active players who are in Teams.
 56. Create a table-valued function to show tournaments by status.
 
 ## Stored Procedures
