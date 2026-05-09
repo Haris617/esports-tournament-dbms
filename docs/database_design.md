@@ -2,11 +2,13 @@
 
 ## Diagram
 
-![Enhanced ERD Diagram](../Enhanced-ERD/visual-erd.svg)
+![Enhanced EERD Diagram](../Enhanced-ERD/EERD.jpeg)
 
-Clean browser version:
+Available diagram files:
 
-- [Enhanced ERD HTML](../Enhanced-ERD/visual-erd.html)
+- [ERD JPEG](../Enhanced-ERD/ERD.jpeg)
+- [EERD JPEG](../Enhanced-ERD/EERD.jpeg)
+- [Enhanced ERD SVG](../Enhanced-ERD/visual-erd.svg)
 
 ## Main Database Tables
 
