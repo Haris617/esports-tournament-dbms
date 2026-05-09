@@ -1,8 +1,14 @@
 # Database Design, ERD, and EERD
 
-## Diagram
+## Diagrams
 
-![Enhanced EERD Diagram](../Enhanced-ERD/EERD.jpeg)
+### ERD
+
+![ERD Diagram](../Enhanced-ERD/ERD.jpeg)
+
+### EERD
+
+![EERD Diagram](../Enhanced-ERD/EERD.jpeg)
 
 Available diagram files:
 
@@ -32,24 +38,6 @@ Available diagram files:
 - `tbl_Teams` to `tbl_Matches`: a team can appear as `team1_id`, `team2_id`, or `winner_team_id`.
 - `tbl_Registeration` to `tbl_Teams` and `tbl_Matches`: registration rows show which team is connected to which match.
 - `tbl_Prizes` to `tbl_Teams`: prize rows store the winning team for each prize position.
-
-## Mermaid ERD
-
-```mermaid
-erDiagram
-    GAME_TITLE ||--o{ TOURNAMENT_EVENT : hosts
-    COMPETITOR ||--o{ ROSTER_ENTRY : joins
-    TEAM_UNIT ||--o{ ROSTER_ENTRY : contains
-    TOURNAMENT_EVENT ||--o{ MATCH_FIXTURE : schedules
-    TEAM_UNIT ||--o{ MATCH_FIXTURE : team_one
-    TEAM_UNIT ||--o{ MATCH_FIXTURE : team_two
-    TEAM_UNIT ||--o{ MATCH_FIXTURE : winner
-    TOURNAMENT_EVENT ||--o{ REGISTRATION_ENTRY : records
-    TEAM_UNIT ||--o{ REGISTRATION_ENTRY : registers
-    MATCH_FIXTURE ||--o{ REGISTRATION_ENTRY : includes
-    TOURNAMENT_EVENT ||--o{ PRIZE_AWARD : offers
-    TEAM_UNIT ||--o{ PRIZE_AWARD : wins
-```
 
 ## EERD Explanation
 
