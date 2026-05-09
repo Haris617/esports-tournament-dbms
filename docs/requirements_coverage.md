@@ -7,7 +7,7 @@ This file maps the DBMS project requirements to the files included in this repos
 | Requirement | Status | Location |
 | --- | --- | --- |
 | At least 6 tables | Covered | `sql/01_schema_tables.sql` creates 8 main project tables. |
-| ERD / EERD visual | Covered | `Enhanced-ERD/ERD.jpeg`, `Enhanced-ERD/EERD.jpeg`, `Enhanced-ERD/visual-erd.svg`, and `docs/database_design.md`. |
+| ERD / EERD visual | Covered | `Enhanced-ERD/ERD.jpeg`, `Enhanced-ERD/EERD.jpeg`, and `docs/database_design.md`. |
 | Split SQL work clearly | Covered | `sql/` contains numbered files by topic. |
 | Final source preserved | Covered | `final-source-code/Final Source Code.sql`. |
 | Question numbering | Covered | `Q1` to `Q61` are continuous in the final source, split SQL, `questions.md`, and GUI. |

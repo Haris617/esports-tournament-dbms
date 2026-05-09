@@ -8,7 +8,6 @@ Available diagram files:
 
 - [ERD JPEG](../Enhanced-ERD/ERD.jpeg)
 - [EERD JPEG](../Enhanced-ERD/EERD.jpeg)
-- [Enhanced ERD SVG](../Enhanced-ERD/visual-erd.svg)
 
 ## Main Database Tables
 

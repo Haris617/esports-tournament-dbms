@@ -17,13 +17,12 @@ No server or installation is required.
 - [Split SQL folder](../sql/)
 - [ERD JPEG](../Enhanced-ERD/ERD.jpeg)
 - [EERD JPEG](../Enhanced-ERD/EERD.jpeg)
-- [Enhanced ERD SVG](../Enhanced-ERD/visual-erd.svg)
 
 ## What The GUI Shows
 
 - Project overview metrics
 - Schema and relationship explanation
 - PK/FK notes in the schema section
-- Enhanced ERD diagram
+- Enhanced EERD diagram
 - Final sample records after the SQL update/delete operations
 - SQL query explorer matching `Q1` to `Q61`

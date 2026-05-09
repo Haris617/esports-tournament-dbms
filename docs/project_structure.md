@@ -16,7 +16,7 @@ This folder is arranged so the DBMS project is easy to upload to GitHub, review,
 - `final-source-code/` - Canonical final SQL source file.
 - `sql/` - Split SQL files arranged in execution order.
 - `gui/` - Static browser GUI files.
-- `Enhanced-ERD/` - Current ERD/EERD JPEG diagrams and SVG diagram source.
+- `Enhanced-ERD/` - Current ERD and EERD JPEG diagrams.
 - `docs/` - Extra documentation for the scenario, database design, requirements coverage, and SSMS running steps.
 
 ## SQL File Order
