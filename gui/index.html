@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Esports Tournament DBMS GUI</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
+  <!-- Main app shell: sidebar navigation on the left, project content on the right. -->
   <div class="app-shell">
     <aside class="sidebar" aria-label="Project navigation">
+      <!-- Project title block shown at the top of the sidebar. -->
       <div class="brand">
         <div class="brand-mark">DB</div>
         <div>
@@ -33,6 +35,7 @@
     </aside>
 
     <main class="main">
+      <!-- Overview section: high-level project explanation and quick metrics. -->
       <section id="overview" class="section">
         <div class="topbar">
           <div>
@@ -75,6 +78,7 @@
         </div>
       </section>
 
+      <!-- Schema section: app.js fills the table cards; the two diagram images are static assets. -->
       <section id="schema" class="section">
         <div class="section-heading">
           <p class="eyebrow">Design</p>
@@ -82,7 +86,7 @@
         </div>
 
         <div class="schema-layout">
-          <div class="panel">
+          <div class="panel main-tables-panel">
             <div class="section-heading compact">
               <p class="eyebrow">Main tables</p>
               <h3>Entity purpose</h3>
@@ -90,18 +94,37 @@
             <div class="table-card-grid" id="tableCards"></div>
           </div>
 
-          <div class="panel erd-panel">
-            <div class="section-heading compact">
-              <p class="eyebrow">EERD</p>
-              <h3>Enhanced relationship diagram</h3>
+          <div class="schema-diagram-grid">
+            <div class="panel erd-panel">
+              <div class="section-heading compact">
+                <p class="eyebrow">ERD</p>
+                <h3>Entity relationship diagram</h3>
+              </div>
+              <div class="diagram-body">
+                <div class="diagram-media">
+                  <img src="../Enhanced-ERD/ERD.jpeg" alt="ERD diagram for esports tournament database" class="erd-image" loading="lazy" decoding="async">
+                </div>
+              </div>
             </div>
-            <img src="../Enhanced-ERD/EERD.jpeg" alt="Enhanced EERD diagram for esports tournament database" class="erd-image">
+
+            <div class="panel erd-panel eerd-panel">
+              <div class="section-heading compact">
+                <p class="eyebrow">EERD</p>
+                <h3>Enhanced relationship diagram</h3>
+              </div>
+              <div class="diagram-body eerd-body">
+                <div class="diagram-media">
+                  <img src="../Enhanced-ERD/EERD.jpeg" alt="Enhanced EERD diagram for esports tournament database" class="erd-image" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="relationship-grid" id="relationshipGrid"></div>
       </section>
 
+      <!-- Records section: app.js builds table tabs and rows from the sample data object. -->
       <section id="records" class="section">
         <div class="section-heading">
           <p class="eyebrow">Sample data</p>
@@ -123,6 +146,7 @@
         </div>
       </section>
 
+      <!-- Query explorer section: categories and selected SQL snippets are rendered by app.js. -->
       <section id="queries" class="section">
         <div class="section-heading">
           <p class="eyebrow">SQL explanation</p>
@@ -149,6 +173,7 @@
         </div>
       </section>
 
+      <!-- Coverage section: requirement cards show what the final SQL project includes. -->
       <section id="requirements" class="section">
         <div class="section-heading">
           <p class="eyebrow">Requirement mapping</p>
@@ -160,6 +185,6 @@
     </main>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>

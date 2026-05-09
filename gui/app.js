@@ -1,3 +1,5 @@
+// Static sample data copied from the final SQL project.
+// The Records section reads this object and turns each array into table rows.
 const db = {
     "games":  [
                   {
@@ -652,17 +654,51 @@ const db = {
                ]
 };
 
+// Schema cards shown in the Main Tables area.
 const tableDefinitions = [
-  { name: "tbl_Games", purpose: "Stores game title, genre, and maximum team size.", keys: ["(PK) game_id"] },
-  { name: "tbl_Tournaments", purpose: "Stores tournament schedule, status, and selected game.", keys: ["(PK) tournament_id", "(FK) game_id"] },
-  { name: "tbl_Teams", purpose: "Stores team details independently.", keys: ["(PK) team_id"] },
-  { name: "tbl_Players", purpose: "Stores registered player details with unique email and username.", keys: ["(PK) player_id", "UNIQUE email", "UNIQUE username"] },
-  { name: "tbl_TeamPlayers", purpose: "Connects teams and players with membership status.", keys: ["(PK) team_player_id", "(FK) team_id", "(FK) player_id"] },
-  { name: "tbl_Matches", purpose: "Stores match teams, winner, scores, and play time.", keys: ["(PK) match_id", "(FK) tournament_id", "(FK) team ids"] },
-  { name: "tbl_Registeration", purpose: "Shows which teams played which matches in which tournaments.", keys: ["(PK) registeration_id", "(FK) tournament_id", "(FK) team_id", "(FK) match_id"] },
-  { name: "tbl_Prizes", purpose: "Stores prize positions, titles, integer amounts, and winning teams.", keys: ["(PK) prize_id", "(FK) tournament_id", "(FK) team_id", "INT prize_amount", "CHECK position 1-3"] }
+  {
+    name: "tbl_Games",
+    purpose: "Stores game title, genre, and maximum team size.",
+    keys: ["(PK) game_id", "game_name", "genre", "max_team_size"]
+  },
+  {
+    name: "tbl_Tournaments",
+    purpose: "Stores tournament schedule, status, and selected game.",
+    keys: ["(PK) tournament_id", "title", "start_date", "end_date", "status", "(FK) game_id"]
+  },
+  {
+    name: "tbl_Teams",
+    purpose: "Stores team details independently.",
+    keys: ["(PK) team_id", "team_name", "created_at"]
+  },
+  {
+    name: "tbl_Players",
+    purpose: "Stores registered player details with unique email and username.",
+    keys: ["(PK) player_id", "full_name", "UNIQUE email", "UNIQUE username", "is_active_flag"]
+  },
+  {
+    name: "tbl_TeamPlayers",
+    purpose: "Connects teams and players with membership status.",
+    keys: ["(PK) team_player_id", "membership_status", "(FK) team_id", "(FK) player_id"]
+  },
+  {
+    name: "tbl_Matches",
+    purpose: "Stores match teams, winner, scores, and play time.",
+    keys: ["(PK) match_id", "team1_score", "team2_score", "played_at", "(FK) tournament_id", "(FK) team1_id", "(FK) team2_id", "(FK) winner_team_id"]
+  },
+  {
+    name: "tbl_Registeration",
+    purpose: "Shows which teams played which matches in which tournaments.",
+    keys: ["(PK) registeration_id", "(FK) tournament_id", "(FK) team_id", "(FK) match_id"]
+  },
+  {
+    name: "tbl_Prizes",
+    purpose: "Stores prize positions, titles, integer amounts, and winning teams.",
+    keys: ["(PK) prize_id", "CHECK position 1-3", "prize_title", "prize_amount", "(FK) tournament_id", "(FK) team_id"]
+  }
 ];
 
+// Relationship summary cards shown under the ERD/EERD diagrams.
 const relationships = [
   ["tbl_Games -> tbl_Tournaments", "One game can host many tournaments through game_id."],
   ["tbl_Players -> tbl_TeamPlayers <- tbl_Teams", "TeamPlayers connects players to teams with membership_status."],
@@ -672,6 +708,7 @@ const relationships = [
   ["tbl_Prizes -> tbl_Teams", "Prize rows store the tournament, winning team, position, title, and integer amount."]
 ];
 
+// Requirement coverage cards shown in the final section of the GUI.
 const coverage = [
     {
         "title":  "Canonical source",
@@ -1221,6 +1258,7 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+// Build the dashboard number cards from the in-memory sample data.
 function renderMetrics() {
   const totalPrize = db.prizes.reduce((sum, prize) => sum + prize.prize_amount, 0);
   const metrics = [
@@ -1237,6 +1275,7 @@ function renderMetrics() {
     .join("");
 }
 
+// Show tournament counts by status using simple progress bars.
 function renderStatusBars() {
   const statuses = ["Finished", "Upcoming", "Ongoing"];
   const total = db.tournaments.length;
@@ -1250,18 +1289,26 @@ function renderStatusBars() {
   }).join("");
 }
 
+// Render one compact card per SQL table.
 function renderTableCards() {
   document.getElementById("tableCards").innerHTML = tableDefinitions.map((table, index) => {
-    const accents = ["green", "amber", "violet", "red"];
-    const tags = table.keys.map((key, keyIndex) => `<span class="tag ${accents[(index + keyIndex) % accents.length]}">${escapeHtml(key)}</span>`).join("");
+    const tags = table.keys.map((key) => `<span class="tag ${schemaPillClass(key)}">${escapeHtml(key)}</span>`).join("");
     return `<article class="mini-card">
-      <strong>${table.name}</strong>
-      <p>${table.purpose}</p>
+      <strong>${escapeHtml(table.name)}</strong>
+      <p>${escapeHtml(table.purpose)}</p>
       <div class="tag-list">${tags}</div>
     </article>`;
   }).join("");
 }
 
+function schemaPillClass(key) {
+  if (key.startsWith("(PK)")) return "green";
+  if (key.startsWith("(FK)")) return "amber";
+  if (key.startsWith("UNIQUE") || key.startsWith("CHECK")) return "red";
+  return "violet";
+}
+
+// Render short relationship explanations below the diagram cards.
 function renderRelationships() {
   document.getElementById("relationshipGrid").innerHTML = relationships.map(([title, text]) => `
     <article class="relationship-card">
@@ -1271,12 +1318,14 @@ function renderRelationships() {
   `).join("");
 }
 
+// Build tabs for browsing the inserted sample records.
 function renderDataTabs() {
   document.getElementById("dataTabs").innerHTML = Object.keys(dataViews).map((name) => `
     <button class="tab-button ${name === activeDataView ? "active" : ""}" type="button" data-view="${name}">${name}</button>
   `).join("");
 }
 
+// Render the selected sample-data table and apply the search filter.
 function renderRecordTable() {
   const search = document.getElementById("recordSearch").value.trim().toLowerCase();
   const view = dataViews[activeDataView];
@@ -1289,6 +1338,7 @@ function renderRecordTable() {
   document.getElementById("recordTable").innerHTML = `${head}<tbody>${body}</tbody>`;
 }
 
+// Style status-like values as pills while leaving normal values as text.
 function formatCell(column, value) {
   const safeValue = escapeHtml(value ?? "");
   const statusColumns = ["status", "is_active_flag", "membership_status"];
@@ -1298,12 +1348,14 @@ function formatCell(column, value) {
   return safeValue;
 }
 
+// Build the SQL query category tabs.
 function renderQueryTabs() {
   document.getElementById("queryTabs").innerHTML = Object.keys(queries).map((category) => `
     <button class="tab-button ${category === activeQueryCategory ? "active" : ""}" type="button" data-category="${category}">${category}</button>
   `).join("");
 }
 
+// Show the query titles for the currently selected category.
 function renderQueryList() {
   const items = queries[activeQueryCategory];
   document.getElementById("queryList").innerHTML = items.map((item, index) => `
@@ -1314,6 +1366,7 @@ function renderQueryList() {
   `).join("");
 }
 
+// Display the selected SQL query and explanation in the code panel.
 function renderSelectedQuery() {
   const item = queries[activeQueryCategory][activeQueryIndex];
   document.getElementById("queryCategory").textContent = activeQueryCategory;
@@ -1323,6 +1376,7 @@ function renderSelectedQuery() {
   document.getElementById("queryCode").textContent = item.code;
 }
 
+// Render the project requirement coverage cards.
 function renderCoverage() {
   document.getElementById("coverageGrid").innerHTML = coverage.map((item) => `
     <article class="coverage-card">
@@ -1333,6 +1387,7 @@ function renderCoverage() {
   `).join("");
 }
 
+// Wire up tab clicks, search input, query selection, and active nav highlighting.
 function setupEvents() {
   document.getElementById("dataTabs").addEventListener("click", (event) => {
     const button = event.target.closest("[data-view]");
@@ -1377,6 +1432,7 @@ function setupEvents() {
   sections.forEach((section) => observer.observe(section));
 }
 
+// Initial render for every dynamic part of the static GUI.
 function init() {
   renderMetrics();
   renderStatusBars();
