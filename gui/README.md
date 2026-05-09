@@ -15,6 +15,8 @@ No server or installation is required.
 - [Root README](../README.md)
 - [Final SQL source](<../final-source-code/Final Source Code.sql>)
 - [Split SQL folder](../sql/)
+- [ERD JPEG](../Enhanced-ERD/ERD.jpeg)
+- [EERD JPEG](../Enhanced-ERD/EERD.jpeg)
 - [Enhanced ERD SVG](../Enhanced-ERD/visual-erd.svg)
 
 ## What The GUI Shows

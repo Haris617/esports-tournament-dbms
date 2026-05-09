@@ -8,7 +8,15 @@ The canonical final SQL source is preserved here:
 
 The same work is also split into numbered files inside [sql/](sql/) so it is easier to review and run in SSMS. The question numbers are now continuous from `Q1` to `Q61` across the final source, split SQL files, question list, and GUI.
 
-![Enhanced ERD Diagram](Enhanced-ERD/visual-erd.svg)
+## ERD And EERD
+
+### ERD
+
+![ERD Diagram](Enhanced-ERD/ERD.jpeg)
+
+### EERD
+
+![EERD Diagram](Enhanced-ERD/EERD.jpeg)
 
 ## Quick Links
 
@@ -27,7 +35,7 @@ The same work is also split into numbered files inside [sql/](sql/) so it is eas
 | [final-source-code/](final-source-code/) | Canonical final SQL source file. |
 | [sql/](sql/) | Split SQL scripts arranged in execution order. |
 | [gui/](gui/) | Static browser GUI for presenting the project. |
-| [Enhanced-ERD/](Enhanced-ERD/) | Current diagram SVG and browser-openable HTML. |
+| [Enhanced-ERD/](Enhanced-ERD/) | Current ERD/EERD JPEG diagrams and SVG diagram source. |
 | [docs/](docs/) | Supporting project documentation. |
 | [questions.md](questions.md) | Clean DBMS question list matching `Q1` to `Q61`. |
 | [run_all.sql](run_all.sql) | SQLCMD runner that executes all split SQL files. |
@@ -76,8 +84,9 @@ The project also includes a temporary practice table, `tbl_testTable`, for DDL o
 
 ## Diagram
 
+- [ERD JPEG](Enhanced-ERD/ERD.jpeg)
+- [EERD JPEG](Enhanced-ERD/EERD.jpeg)
 - [Enhanced ERD SVG](Enhanced-ERD/visual-erd.svg)
-- [Enhanced ERD HTML](Enhanced-ERD/visual-erd.html)
 - [Database Design Notes](docs/database_design.md)
 
 ## SQL Features Covered
