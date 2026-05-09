@@ -568,13 +568,29 @@ RIGHT JOIN tbl_Matches m
     ON winner.team_id = m.winner_team_id
 ORDER BY m.match_id;
 
--- Q49. Use FULL JOIN to show tournaments and prizes.
+-- Q49. Show Teams that Exist in Matches But, Not Exist in Prizes
+
+select T.team_id
+from tbl_Teams T
+where EXISTS (
+    select 1
+    from tbl_Matches M
+    where M.team1_id = T.team_id
+    or M.team2_id = T.team_id)
+
+    AND NOT EXISTS (
+        select 1
+        from tbl_Prizes P
+        where P.team_id = T.team_id)
+
+
+-- Q50. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title, p.prize_title
 FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
 ON t.tournament_id = p.tournament_id
 
--- Q50. Use SELF JOIN to show teams playing against each other and Winner Team
+-- Q51. Use SELF JOIN to show teams playing against each other and Winner Team
 
 SELECT T1.team_name AS Team_1,
        T2.team_name AS Team_2,
@@ -599,7 +615,7 @@ ON M.winner_team_id = W.team_id;
 
 /* Numeric Aggregate Function */
 
--- Q51. Show total, average, highest, and lowest prize amount.
+-- Q52. Show total, average, highest, and lowest prize amount.
 SELECT
     SUM(prize_amount) AS total_prize_amount,
     AVG(prize_amount) AS average_prize_amount,
@@ -610,7 +626,7 @@ FROM tbl_Prizes;
 
 /* Varchar Aggregate Function */
 
--- Q52. Count total players and show first/last player name alphabetically.
+-- Q53. Count total players and show first/last player name alphabetically.
 
 SELECT
     COUNT(full_name) AS total_players,
@@ -629,7 +645,7 @@ FROM tbl_Players;
    1. SCALAR FUNCTION
    ========================= */
 
--- Q53. Create a scalar function to display total matches.
+-- Q54. Create a scalar function to display total matches.
 
 Create or alter function fn_displayTotalMatches()
 returns INT
@@ -649,7 +665,7 @@ select dbo.fn_displayTotalMatches() as totalMatches;
    2. SCALAR FUNCTION WITH PARAMETERS AND CALCULATION
    =================================================== */
 
--- Q54. Create a scalar function to calculate total match score.
+-- Q55. Create a scalar function to calculate total match score.
 
 CREATE OR ALTER FUNCTION fn_TotalMatchScore(@team1_score INT, @team2_score INT)
 RETURNS INT
@@ -675,7 +691,7 @@ FROM tbl_Matches;
    3. TABLE VALUED FUNCTION
    ========================= */
 
--- Q55. Create a table-valued function to show all active players who are in Teams
+-- Q56. Create a table-valued function to show all active players who are in Teams
 CREATE OR ALTER FUNCTION fn_ShowActivePlayers()
 RETURNS TABLE
 AS
@@ -700,7 +716,7 @@ SELECT * FROM dbo.fn_ShowActivePlayers();
    4. TABLE VALUED FUNCTION WITH PARAMETER
    ========================================= */
 
--- Q56. Create a table-valued function to show tournaments by status.
+-- Q57. Create a table-valued function to show tournaments by status.
 CREATE OR ALTER FUNCTION fn_TournamentsByStatus (@status NVARCHAR(20))
 RETURNS TABLE
 AS
@@ -724,7 +740,7 @@ FROM dbo.fn_TournamentsByStatus ('Ongoing')
        1. NON PARAMETERIC PROCEDURE
        ========================= */
 
--- Q57. Create a procedure to show all active players.
+-- Q58. Create a procedure to show all active players.
 
 CREATE OR ALTER PROCEDURE sp_ShowActivePlayers
 AS
@@ -743,7 +759,7 @@ EXEC sp_ShowActivePlayers;
    2. PARAMETERIC PROCEDURE
    ========================= */
 
--- Q58. Create a procedure to show tournaments by status.
+-- Q59. Create a procedure to show tournaments by status.
 
 CREATE OR ALTER PROCEDURE sp_ShowTournamentsByStatus
     @status NVARCHAR(20)
@@ -768,25 +784,32 @@ EXEC sp_ShowTournamentsByStatus 'Ongoing';
    3. PROCEDURE WITH IF ELSE
    ========================= */
 
--- Q59. Create a procedure to check if a player is active or inactive.
-
-CREATE PROCEDURE CheckPlayerStatus (@is_active_flag INT)
+-- Q60. Create a procedure to check whether a team has won any prize or not.
+CREATE OR ALTER PROCEDURE CheckTeamPrizeStatus
+    @TeamID INT
 AS
 BEGIN
-    IF @is_active_flag = 1
-        PRINT 'Player is Active';
+    IF EXISTS
+    (
+        SELECT *
+        FROM tbl_Prizes
+        WHERE team_id = @TeamID
+    )
+        PRINT 'Team has won a prize';
     ELSE
-        PRINT 'Player is Inactive';
+        PRINT 'Team has not won any prize';
 END;
+GO
 
-EXEC CheckPlayerStatus 1;
+EXEC CheckTeamPrizeStatus 1;
+GO
 
 
 /* =========================
    4. PROCEDURE WITH WHILE LOOP
    ========================= */
 
--- Q60. Show teams who won prize in a specific tournament.
+-- Q61. Show teams who won prize in a specific tournament.
 
 Create or ALTER Procedure sp_TeamWinningPrice(@TournamentID INT)
 as
@@ -811,5 +834,3 @@ EXEC sp_TeamWinningPrice 1
 
 
 
-        
-    

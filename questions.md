@@ -1,6 +1,6 @@
 # Haris SQL Questions
 
-This question list follows the `Q1` to `Q60` flow from `final-source-code/Final Source Code.sql` and keeps the wording aligned with the actual SQL examples.
+This question list follows the `Q1` to `Q61` flow from `final-source-code/Final Source Code.sql` and keeps the wording aligned with the actual SQL examples.
 
 ## Part A: DDL Commands
 
@@ -76,35 +76,36 @@ This question list follows the `Q1` to `Q60` flow from `final-source-code/Final 
 46. Use LEFT JOIN to show all players and their teams.
 47. Use LEFT JOIN to show all tournaments and their registered teams.
 48. Use RIGHT JOIN to show all matches with winner teams.
-49. Use FULL JOIN to show tournaments and prizes.
-50. Use SELF JOIN to show teams playing against each other and Winner Team.
+49. Show Teams that Exist in Matches But, Not Exist in Prizes.
+50. Use FULL JOIN to show tournaments and prizes.
+51. Use SELF JOIN to show teams playing against each other and Winner Team.
 
 ## Aggregate Function Queries
 
-51. Show total, average, highest, and lowest prize amount.
-52. Count total players and show first/last player name alphabetically.
+52. Show total, average, highest, and lowest prize amount.
+53. Count total players and show first/last player name alphabetically.
 
 ## User Defined Functions
 
-53. Create a scalar function to display total matches.
-54. Create a scalar function to calculate total match score.
-55. Create a table-valued function to show all active players who are in Teams.
-56. Create a table-valued function to show tournaments by status.
+54. Create a scalar function to display total matches.
+55. Create a scalar function to calculate total match score.
+56. Create a table-valued function to show all active players who are in Teams.
+57. Create a table-valued function to show tournaments by status.
 
 ## Stored Procedures
 
 ### Non Parameteric Procedure
 
-57. Create a procedure to show all active players.
+58. Create a procedure to show all active players.
 
 ### Parameteric Procedure
 
-58. Create a procedure to show tournaments by status.
+59. Create a procedure to show tournaments by status.
 
 ### Procedure With IF ELSE
 
-59. Create a procedure to check if a player is active or inactive.
+60. Create a procedure to check whether a team has won any prize or not.
 
 ### Procedure With WHILE Loop
 
-60. Show teams who won prize in a specific tournament.
+61. Show teams who won prize in a specific tournament.

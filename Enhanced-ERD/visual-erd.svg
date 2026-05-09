@@ -203,7 +203,9 @@
     <rect class="fk" x="766" y="940" width="38" height="22" rx="6"/>
     <text class="chipText" x="785" y="956" text-anchor="middle">FK</text>
     <text class="field" x="820" y="957">team_id</text>
-    <text class="field" x="766" y="988">registered_at</text>
+    <rect class="fk" x="766" y="971" width="38" height="22" rx="6"/>
+    <text class="chipText" x="785" y="987" text-anchor="middle">FK</text>
+    <text class="field" x="820" y="988">match_id</text>
   </g>
 
   <!-- tbl_Teams -->

@@ -53,14 +53,29 @@ RIGHT JOIN tbl_Matches m
     ON winner.team_id = m.winner_team_id
 ORDER BY m.match_id;
 
--- Q49. Use FULL JOIN to show tournaments and prizes.
+-- Q49. Show Teams that Exist in Matches But, Not Exist in Prizes
+SELECT T.team_id
+FROM tbl_Teams T
+WHERE EXISTS (
+    SELECT 1
+    FROM tbl_Matches M
+    WHERE M.team1_id = T.team_id
+       OR M.team2_id = T.team_id
+)
+AND NOT EXISTS (
+    SELECT 1
+    FROM tbl_Prizes P
+    WHERE P.team_id = T.team_id
+);
+
+-- Q50. Use FULL JOIN to show tournaments and prizes.
 SELECT t.title,
        p.prize_title
 FROM tbl_Tournaments t
 FULL JOIN tbl_Prizes p
     ON t.tournament_id = p.tournament_id
 
--- Q50. Use SELF JOIN to show teams playing against each other and Winner Team.
+-- Q51. Use SELF JOIN to show teams playing against each other and Winner Team.
 SELECT T1.team_name AS Team_1,
        T2.team_name AS Team_2,
        W.team_name AS Winner_Team

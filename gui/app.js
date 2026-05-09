@@ -675,7 +675,7 @@ const relationships = [
 const coverage = [
     {
         "title":  "Canonical source",
-        "text":  "Final Source Code.sql uses continuous Q1 to Q60 numbering and drives the rest of the project."
+        "text":  "Final Source Code.sql uses continuous Q1 to Q61 numbering and drives the rest of the project."
     },
     {
         "title":  "Core schema",
@@ -707,7 +707,7 @@ const coverage = [
     },
     {
         "title":  "Join queries",
-        "text":  "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, and SELF JOIN."
+        "text":  "INNER JOIN, LEFT JOIN, RIGHT JOIN, FULL JOIN, SELF JOIN, and a match/prize EXISTS check."
     },
     {
         "title":  "Reusable SQL logic",
@@ -1098,80 +1098,86 @@ const queries = {
                       "code":  "-- Q48. Use RIGHT JOIN to show all matches with winner teams.\r\nSELECT m.match_id,\r\n       winner.team_name AS winner_team_name,\r\n       m.team1_score,\r\n       m.team2_score,\r\n       m.played_at\r\nFROM tbl_Teams winner\r\nRIGHT JOIN tbl_Matches m\r\n    ON winner.team_id = m.winner_team_id\r\nORDER BY m.match_id;"
                   },
                   {
-                      "title":  "Q49. Use FULL JOIN to show tournaments and prizes.",
+                      "title":  "Q49. Show Teams that Exist in Matches But, Not Exist in Prizes.",
                       "badge":  "Q49",
-                      "point":  "Use FULL JOIN to show tournaments and prizes.",
-                      "code":  "-- Q49. Use FULL JOIN to show tournaments and prizes.\r\nSELECT t.title,\r\n       p.prize_title\r\nFROM tbl_Tournaments t\r\nFULL JOIN tbl_Prizes p\r\n    ON t.tournament_id = p.tournament_id"
+                      "point":  "Show Teams that Exist in Matches But, Not Exist in Prizes.",
+                      "code":  "-- Q49. Show Teams that Exist in Matches But, Not Exist in Prizes\r\nSELECT T.team_id\r\nFROM tbl_Teams T\r\nWHERE EXISTS (\r\n    SELECT 1\r\n    FROM tbl_Matches M\r\n    WHERE M.team1_id = T.team_id\r\n       OR M.team2_id = T.team_id\r\n)\r\nAND NOT EXISTS (\r\n    SELECT 1\r\n    FROM tbl_Prizes P\r\n    WHERE P.team_id = T.team_id\r\n);"
                   },
                   {
-                      "title":  "Q50. Use SELF JOIN to show teams playing against each other and Winner Team.",
+                      "title":  "Q50. Use FULL JOIN to show tournaments and prizes.",
                       "badge":  "Q50",
+                      "point":  "Use FULL JOIN to show tournaments and prizes.",
+                      "code":  "-- Q50. Use FULL JOIN to show tournaments and prizes.\r\nSELECT t.title,\r\n       p.prize_title\r\nFROM tbl_Tournaments t\r\nFULL JOIN tbl_Prizes p\r\n    ON t.tournament_id = p.tournament_id"
+                  },
+                  {
+                      "title":  "Q51. Use SELF JOIN to show teams playing against each other and Winner Team.",
+                      "badge":  "Q51",
                       "point":  "Use SELF JOIN to show teams playing against each other and Winner Team.",
-                      "code":  "-- Q50. Use SELF JOIN to show teams playing against each other and Winner Team.\r\nSELECT T1.team_name AS Team_1,\r\n       T2.team_name AS Team_2,\r\n       W.team_name AS Winner_Team\r\nFROM tbl_Matches M\r\nINNER JOIN tbl_Teams T1\r\n    ON M.team1_id = T1.team_id\r\nINNER JOIN tbl_Teams T2\r\n    ON M.team2_id = T2.team_id\r\nLEFT JOIN tbl_Teams W\r\n    ON M.winner_team_id = W.team_id;"
+                      "code":  "-- Q51. Use SELF JOIN to show teams playing against each other and Winner Team.\r\nSELECT T1.team_name AS Team_1,\r\n       T2.team_name AS Team_2,\r\n       W.team_name AS Winner_Team\r\nFROM tbl_Matches M\r\nINNER JOIN tbl_Teams T1\r\n    ON M.team1_id = T1.team_id\r\nINNER JOIN tbl_Teams T2\r\n    ON M.team2_id = T2.team_id\r\nLEFT JOIN tbl_Teams W\r\n    ON M.winner_team_id = W.team_id;"
                   }
               ],
     "Functions":  [
                       {
-                          "title":  "Q51. Show total, average, highest, and lowest prize amount.",
-                          "badge":  "Q51",
-                          "point":  "Show total, average, highest, and lowest prize amount.",
-                          "code":  "-- Q51. Show total, average, highest, and lowest prize amount.\r\nSELECT\r\n    SUM(prize_amount) AS total_prize_amount,\r\n    AVG(prize_amount) AS average_prize_amount,\r\n    MAX(prize_amount) AS highest_prize_amount,\r\n    MIN(prize_amount) AS lowest_prize_amount\r\nFROM tbl_Prizes;"
-                      },
-                      {
-                          "title":  "Q52. Count total players and show first/last player name alphabetically.",
+                          "title":  "Q52. Show total, average, highest, and lowest prize amount.",
                           "badge":  "Q52",
-                          "point":  "Count total players and show first/last player name alphabetically.",
-                          "code":  "-- Q52. Count total players and show first/last player name alphabetically.\r\nSELECT\r\n    COUNT(full_name) AS total_players,\r\n    MIN(full_name) AS first_player_name,\r\n    MAX(full_name) AS last_player_name\r\nFROM tbl_Players;"
+                          "point":  "Show total, average, highest, and lowest prize amount.",
+                          "code":  "-- Q52. Show total, average, highest, and lowest prize amount.\r\nSELECT\r\n    SUM(prize_amount) AS total_prize_amount,\r\n    AVG(prize_amount) AS average_prize_amount,\r\n    MAX(prize_amount) AS highest_prize_amount,\r\n    MIN(prize_amount) AS lowest_prize_amount\r\nFROM tbl_Prizes;"
                       },
                       {
-                          "title":  "Q53. Create a scalar function to display total matches.",
+                          "title":  "Q53. Count total players and show first/last player name alphabetically.",
                           "badge":  "Q53",
-                          "point":  "Create a scalar function to display total matches.",
-                          "code":  "-- Q53. Create a scalar function to display total matches.\r\nCREATE OR ALTER FUNCTION fn_displayTotalMatches()\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    DECLARE @totalMatches INT;\r\n\r\n    SELECT @totalMatches = COUNT(*)\r\n    FROM tbl_Matches;\r\n\r\n    RETURN @totalMatches;\r\nEND;\r\n\r\n\r\nSELECT dbo.fn_displayTotalMatches() AS totalMatches;"
+                          "point":  "Count total players and show first/last player name alphabetically.",
+                          "code":  "-- Q53. Count total players and show first/last player name alphabetically.\r\nSELECT\r\n    COUNT(full_name) AS total_players,\r\n    MIN(full_name) AS first_player_name,\r\n    MAX(full_name) AS last_player_name\r\nFROM tbl_Players;"
                       },
                       {
-                          "title":  "Q54. Create a scalar function to calculate total match score.",
+                          "title":  "Q54. Create a scalar function to display total matches.",
                           "badge":  "Q54",
-                          "point":  "Create a scalar function to calculate total match score.",
-                          "code":  "-- Q54. Create a scalar function to calculate total match score.\r\nCREATE OR ALTER FUNCTION fn_TotalMatchScore\r\n(\r\n    @team1_score INT,\r\n    @team2_score INT\r\n)\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    RETURN @team1_score + @team2_score;\r\nEND;\r\n\r\n\r\nSELECT\r\n    match_id,\r\n    team1_score,\r\n    team2_score,\r\n    dbo.fn_TotalMatchScore(team1_score, team2_score) AS total_score\r\nFROM tbl_Matches;"
+                          "point":  "Create a scalar function to display total matches.",
+                          "code":  "-- Q54. Create a scalar function to display total matches.\r\nCREATE OR ALTER FUNCTION fn_displayTotalMatches()\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    DECLARE @totalMatches INT;\r\n\r\n    SELECT @totalMatches = COUNT(*)\r\n    FROM tbl_Matches;\r\n\r\n    RETURN @totalMatches;\r\nEND;\r\n\r\n\r\nSELECT dbo.fn_displayTotalMatches() AS totalMatches;"
                       },
                       {
-                          "title":  "Q55. Create a table-valued function to show all active players who are in Teams.",
+                          "title":  "Q55. Create a scalar function to calculate total match score.",
                           "badge":  "Q55",
-                          "point":  "Create a table-valued function to show all active players who are in Teams.",
-                          "code":  "-- Q55. Create a table-valued function to show all active players who are in Teams.\r\nCREATE OR ALTER FUNCTION fn_ShowActivePlayers()\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Players P\r\n    WHERE P.is_active_flag = 1\r\n      AND P.player_id IN (\r\n          SELECT TP.player_id\r\n          FROM tbl_TeamPlayers TP\r\n      )\r\n);\r\n\r\n\r\nSELECT * FROM dbo.fn_ShowActivePlayers();"
+                          "point":  "Create a scalar function to calculate total match score.",
+                          "code":  "-- Q55. Create a scalar function to calculate total match score.\r\nCREATE OR ALTER FUNCTION fn_TotalMatchScore\r\n(\r\n    @team1_score INT,\r\n    @team2_score INT\r\n)\r\nRETURNS INT\r\nAS\r\nBEGIN\r\n    RETURN @team1_score + @team2_score;\r\nEND;\r\n\r\n\r\nSELECT\r\n    match_id,\r\n    team1_score,\r\n    team2_score,\r\n    dbo.fn_TotalMatchScore(team1_score, team2_score) AS total_score\r\nFROM tbl_Matches;"
                       },
                       {
-                          "title":  "Q56. Create a table-valued function to show tournaments by status.",
+                          "title":  "Q56. Create a table-valued function to show all active players who are in Teams.",
                           "badge":  "Q56",
+                          "point":  "Create a table-valued function to show all active players who are in Teams.",
+                          "code":  "-- Q56. Create a table-valued function to show all active players who are in Teams.\r\nCREATE OR ALTER FUNCTION fn_ShowActivePlayers()\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Players P\r\n    WHERE P.is_active_flag = 1\r\n      AND P.player_id IN (\r\n          SELECT TP.player_id\r\n          FROM tbl_TeamPlayers TP\r\n      )\r\n);\r\n\r\n\r\nSELECT * FROM dbo.fn_ShowActivePlayers();"
+                      },
+                      {
+                          "title":  "Q57. Create a table-valued function to show tournaments by status.",
+                          "badge":  "Q57",
                           "point":  "Create a table-valued function to show tournaments by status.",
-                          "code":  "-- Q56. Create a table-valued function to show tournaments by status.\r\nCREATE OR ALTER FUNCTION fn_TournamentsByStatus\r\n(\r\n    @status NVARCHAR(20)\r\n)\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Tournaments\r\n    WHERE status = @status\r\n);\r\n\r\n\r\nSELECT *\r\nFROM dbo.fn_TournamentsByStatus (\u0027Ongoing\u0027)"
+                          "code":  "-- Q57. Create a table-valued function to show tournaments by status.\r\nCREATE OR ALTER FUNCTION fn_TournamentsByStatus\r\n(\r\n    @status NVARCHAR(20)\r\n)\r\nRETURNS TABLE\r\nAS\r\nRETURN\r\n(\r\n    SELECT *\r\n    FROM tbl_Tournaments\r\n    WHERE status = @status\r\n);\r\n\r\n\r\nSELECT *\r\nFROM dbo.fn_TournamentsByStatus (\u0027Ongoing\u0027)"
                       }
                   ],
     "Procedures":  [
                        {
-                           "title":  "Q57. Create a procedure to show all active players.",
-                           "badge":  "Q57",
-                           "point":  "Create a procedure to show all active players.",
-                           "code":  "-- Q57. Create a procedure to show all active players.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowActivePlayers\r\nAS\r\nBEGIN\r\n    SELECT *\r\n    FROM tbl_Players\r\n    WHERE is_active_flag = 1\r\nEND\r\n\r\n\r\nEXEC sp_ShowActivePlayers;"
-                       },
-                       {
-                           "title":  "Q58. Create a procedure to show tournaments by status.",
+                           "title":  "Q58. Create a procedure to show all active players.",
                            "badge":  "Q58",
-                           "point":  "Create a procedure to show tournaments by status.",
-                           "code":  "-- Q58. Create a procedure to show tournaments by status.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowTournamentsByStatus\r\n    @status NVARCHAR(20)\r\nAS\r\nBEGIN\r\n    SELECT\r\n        tournament_id,\r\n        title,\r\n        start_date,\r\n        end_date,\r\n        status\r\n    FROM tbl_Tournaments\r\n    WHERE status = @status;\r\nEND;\r\n\r\n\r\nEXEC sp_ShowTournamentsByStatus \u0027Ongoing\u0027;"
+                           "point":  "Create a procedure to show all active players.",
+                           "code":  "-- Q58. Create a procedure to show all active players.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowActivePlayers\r\nAS\r\nBEGIN\r\n    SELECT *\r\n    FROM tbl_Players\r\n    WHERE is_active_flag = 1\r\nEND\r\n\r\n\r\nEXEC sp_ShowActivePlayers;"
                        },
                        {
-                           "title":  "Q59. Create a procedure to check if a player is active or inactive.",
+                           "title":  "Q59. Create a procedure to show tournaments by status.",
                            "badge":  "Q59",
-                           "point":  "Create a procedure to check if a player is active or inactive.",
-                           "code":  "-- Q59. Create a procedure to check if a player is active or inactive.\r\n\r\nCREATE PROCEDURE CheckPlayerStatus\r\n    @is_active_flag INT\r\nAS\r\nBEGIN\r\n    IF @is_active_flag = 1\r\n        PRINT \u0027Player is Active\u0027;\r\n    ELSE\r\n        PRINT \u0027Player is Inactive\u0027;\r\nEND;\r\n\r\nEXEC CheckPlayerStatus 1;"
+                           "point":  "Create a procedure to show tournaments by status.",
+                           "code":  "-- Q59. Create a procedure to show tournaments by status.\r\n\r\nCREATE OR ALTER PROCEDURE sp_ShowTournamentsByStatus\r\n    @status NVARCHAR(20)\r\nAS\r\nBEGIN\r\n    SELECT\r\n        tournament_id,\r\n        title,\r\n        start_date,\r\n        end_date,\r\n        status\r\n    FROM tbl_Tournaments\r\n    WHERE status = @status;\r\nEND;\r\n\r\n\r\nEXEC sp_ShowTournamentsByStatus \u0027Ongoing\u0027;"
                        },
                        {
-                            "title":  "Q60. Show teams who won prize in a specific tournament.",
-                            "badge":  "Q60",
+                           "title":  "Q60. Create a procedure to check whether a team has won any prize or not.",
+                           "badge":  "Q60",
+                           "point":  "Create a procedure to check whether a team has won any prize or not.",
+                           "code":  "-- Q60. Create a procedure to check whether a team has won any prize or not.\r\nCREATE OR ALTER PROCEDURE CheckTeamPrizeStatus\r\n    @TeamID INT\r\nAS\r\nBEGIN\r\n    IF EXISTS\r\n    (\r\n        SELECT *\r\n        FROM tbl_Prizes\r\n        WHERE team_id = @TeamID\r\n    )\r\n        PRINT \u0027Team has won a prize\u0027;\r\n    ELSE\r\n        PRINT \u0027Team has not won any prize\u0027;\r\nEND;\r\n\r\nEXEC CheckTeamPrizeStatus 1;"
+                       },
+                       {
+                            "title":  "Q61. Show teams who won prize in a specific tournament.",
+                            "badge":  "Q61",
                             "point":  "Show teams who won prize in a specific tournament.",
-                            "code":  "-- Q60. Show teams who won prize in a specific tournament.\r\n\r\nCREATE OR ALTER PROCEDURE sp_TeamWinningPrice\r\n    @TournamentID INT\r\nAS\r\nBEGIN\r\n    DECLARE @teamID INT;\r\n    SET @teamID = 1;\r\n\r\n    WHILE @teamID <= 12\r\n    BEGIN\r\n        SELECT T.team_name\r\n        FROM tbl_Teams T\r\n        INNER JOIN tbl_Prizes P\r\n            ON P.team_id = T.team_id\r\n           AND P.team_id = @teamID\r\n           AND P.tournament_id = @TournamentID;\r\n\r\n        SET @teamID = @teamID + 1;\r\n    END\r\nEND;\r\n\r\nEXEC sp_TeamWinningPrice 1;"
+                            "code":  "-- Q61. Show teams who won prize in a specific tournament.\r\n\r\nCREATE OR ALTER PROCEDURE sp_TeamWinningPrice\r\n    @TournamentID INT\r\nAS\r\nBEGIN\r\n    DECLARE @teamID INT;\r\n    SET @teamID = 1;\r\n\r\n    WHILE @teamID <= 12\r\n    BEGIN\r\n        SELECT T.team_name\r\n        FROM tbl_Teams T\r\n        INNER JOIN tbl_Prizes P\r\n            ON P.team_id = T.team_id\r\n           AND P.team_id = @teamID\r\n           AND P.tournament_id = @TournamentID;\r\n\r\n        SET @teamID = @teamID + 1;\r\n    END\r\nEND;\r\n\r\nEXEC sp_TeamWinningPrice 1;"
                        }
                    ]
 };

@@ -24,4 +24,4 @@ No server or installation is required.
 - PK/FK notes in the schema section
 - Enhanced ERD diagram
 - Final sample records after the SQL update/delete operations
-- SQL query explorer matching `Q1` to `Q60`
+- SQL query explorer matching `Q1` to `Q61`
